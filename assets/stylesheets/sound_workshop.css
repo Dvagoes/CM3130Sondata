@@ -4,3 +4,14 @@
     margin-right: 6px;
     margin-bottom: 6px;
 }
+
+#option_switch {
+    width: auto;
+    margin: 6px;
+}
+
+.op_switch {
+    width: 12%;
+    height: 40px;
+    margin: 0px;
+}
