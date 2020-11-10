@@ -14,7 +14,6 @@ app.set('view engine', 'ejs');
 //const fs = require('fs');
 //fs.writeFile('hot-colormap.json', JSON.stringify(colors));   
 
-fs.
 app.get('/', function (req, res) {
     
     
