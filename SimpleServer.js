@@ -3,12 +3,18 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+const colormap = require('colormap');
+
+module.exports.colormap = colormap;
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
-// use res.render to load up an ejs view file
 
+//const fs = require('fs');
+//fs.writeFile('hot-colormap.json', JSON.stringify(colors));   
+
+fs.
 app.get('/', function (req, res) {
     
     
@@ -19,6 +25,7 @@ app.get('/', function (req, res) {
 // set up pathing for assets
 
 app.use(express.static(path.join(__dirname, 'assets')));
+
 
 // open the port
 
