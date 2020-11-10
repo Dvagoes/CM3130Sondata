@@ -8,11 +8,11 @@ function dropHandler(ev) {
     console.log('File(s) dropped');
 
     ev.preventDefault()
-
+    let file;
     if (ev.dataTransfer.items) {
         for (var i = 0; i < ev.dataTransfer.items.length; i++) {
             if (ev.dataTransfer.items[i].kind === 'file') {
-                var file = ev.dataTransfer.items[i].getAsFile();
+                file = ev.dataTransfer.items[i].getAsFile();
                 console.log('...file [' + i + '].name = ' + file.name);
             }
         }
@@ -27,4 +27,11 @@ function dragOverHandler(ev) {
     console.log('File(s) in drop zone');
 
     ev.preventDefault();
+}
+
+function formOnSubmit(ev) {
+    ev.preventDefault();
+    let el = document.getElementById("audio_upload");
+    console.log(el.files);
+    console.log("file upload test" + el.name);
 }

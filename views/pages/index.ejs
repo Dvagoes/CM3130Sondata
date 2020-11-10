@@ -34,11 +34,21 @@
 
     <div id="upload_container">
         <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event)">
+
             <label for="audio_upload">
                 Choose an Audio File:
             </label>
+
             <div id="manual_file_select">
-                <input type="file" id="audio_upload" name="audio_upload" accept="audio/*">
+                <form id="manual_file_select_form" onsubmit="formOnSubmit(event)">
+
+                    <input type="file" id="audio_upload" name="audio_upload" accept="audio/*">
+
+                    <button type="submit" value="Submit">Submit</button>
+
+                    <button type="submit" value="Clear">Clear</button>
+
+                </form>
             </div>
         </div>
     </div>
