@@ -1,6 +1,8 @@
 //following code is taken from https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
 //currently early implementation subject to changes later
 
+//to get file drag and drop working. you need to drag the file over "Choose an Audio File" on the webpage
+
 
 function dropHandler(ev) {
     console.log('File(s) dropped');

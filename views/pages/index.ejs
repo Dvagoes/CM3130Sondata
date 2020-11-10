@@ -27,9 +27,19 @@
         <p>How to use the application</p>
     </div>
 
+    <!--
+        known issues with current form:
+        css doesn't appear to be working
+    -->
+
     <div id="upload_container">
         <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event)">
-            <p>Upload audio</p>
+            <label for="audio_upload">
+                Choose an Audio File:
+            </label>
+            <div id="manual_file_select">
+                <input type="file" id="audio_upload" name="audio_upload" accept="audio/*">
+            </div>
         </div>
     </div>
 
@@ -75,6 +85,7 @@
     </div>
     
     <script src = "/scripts/script.js"></script>
+
     <!--upload-script.js contains code for uploading files.-->
     <script src = "/scripts/upload-script.js"></script>
 
