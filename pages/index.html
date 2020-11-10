@@ -1,7 +1,26 @@
 <!DOCTYPE html>
 
 <head>
+
     <style src = "../assets/stylesheets/sound_workshop.css"></style>
+   <!--This is a link to the basic wavesurfer-->
+   <script src="https://unpkg.com/wavesurfer.js"></script>
+   <!--This is a link to the spectrogram plugin for wavesurfer-->
+   <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.spectrogram.js"></script>
+   <script src = "../assets/scripts/script.js"></script>
+   <!--<script type="module" src="../assets/scripts/script.js"></script>
+   <script data-main="../assets/scripts/actualScripts/main" src="../assets/scripts/require.js"></script>
+
+   <script>
+
+        require(['../assets/scripts/main'], function(){
+            
+            require(['actualScripts/script'])
+
+        });
+
+   </script>-->
+
 </head>
 
 <body>
@@ -23,6 +42,12 @@
             <div id="visual_output">
                 
             </div>
+
+            <div id = "wave-spectrogram">
+
+
+            </div>
+
         </div>
         <div id="option_container">
             <div id="option_switch">
@@ -49,5 +74,6 @@
             </div>
         </div>
     </div>
+    
 
 </body>
