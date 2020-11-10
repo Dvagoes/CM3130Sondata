@@ -1,9 +1,15 @@
 //following code is taken from https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
 //currently early implementation subject to changes later
 
+const { Router } = require("express");
+
 //to get file drag and drop working. you need to drag the file over "Choose an Audio File" on the webpage
 
 // ignore commented code for now
+
+var express = require("express");
+var router = express.Router();
+
 
 function dropHandler(ev) {
     console.log('File(s) dropped');
@@ -36,10 +42,11 @@ function dragOverHandler(ev) {
 
 function formOnSubmit(ev) {
     ev.preventDefault();
-    let el = document.getElementById("audio_upload");
+    // let el = document.getElementById("audio_upload");
+    let file = ev.target.files[0];
     //console.log(el.files);
     //console.log("file upload test" + el.name);
-    fileProcess(el.files[0]);
+    fileProcess(file);
 }
 
 /**
@@ -48,7 +55,32 @@ function formOnSubmit(ev) {
  * currently it only gets the file details printed to console in json format.
  */
 function fileProcess(file) {
+
     console.log(file);
     let text = "Filename: "
     document.getElementById("display_filename").innerHTML = text + file.name;
+
+    uploadFile(file);    
+}
+
+function fileUpload(file) {
+    
+    const multer = require("multer");
+    const multerConf = {
+        storage : multer.diskStorage({
+            destination : function(req, file, next) {
+                next(null, './assets/Audio');
+            },
+            filename: function(req,file,next){
+                const ext = file.mimetype.split('/'[1]);
+                next(null, audio + ext)
+                console.log(file);
+            }
+        })
+    }
+
+    router.post('/upload',multer(multerConf).single('audio'), function(req,res){
+        res.send('this is post route upload');
+    })
+
 }
