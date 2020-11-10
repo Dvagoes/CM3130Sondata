@@ -21,3 +21,9 @@ p{
     background-color: pink;
 
 }
+
+#drop_zone {
+    border: 5px solid black;
+    width: 96px;
+    height: 96px;
+}

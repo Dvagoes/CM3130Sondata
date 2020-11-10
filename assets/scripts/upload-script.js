@@ -1,0 +1,28 @@
+//following code is taken from https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
+//currently early implementation subject to changes later
+
+
+function dropHandler(ev) {
+    console.log('File(s) dropped');
+
+    ev.preventDefault()
+
+    if (ev.dataTransfer.items) {
+        for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+            if (ev.dataTransfer.items[i].kind === 'file') {
+                var file = ev.dataTransfer.items[i].getAsFile();
+                console.log('...file [' + i + '].name = ' + file.name);
+            }
+        }
+    } else {
+        for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+            console.log('...file [' + i + '].name = ' + file.name);
+        }
+    }
+}
+
+function dragOverHandler(ev) {
+    console.log('File(s) in drop zone');
+
+    ev.preventDefault();
+}
