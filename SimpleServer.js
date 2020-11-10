@@ -3,8 +3,10 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-//var upload = require("express-fileupload");
+var upload = require("express-fileupload");
 const colormap = require('colormap');
+var multer = require('multer');
+var bodyParser = require('body-parser');
 
 module.exports.colormap = colormap;
 
@@ -17,10 +19,17 @@ app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
     
+
     
     res.render('pages/index');
 
 });
+
+app.use(bodyParser.json());
+
+app.post('/audio', function(req,res){
+
+})
 
 // set up pathing for assets
 
