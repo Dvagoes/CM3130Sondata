@@ -2,8 +2,6 @@ window.addEventListener('load', function () {
     
   console.log("Javascript is working")
 
-
-
 var wavesurfer = WaveSurfer.create({
 
     container: '#visual_output',
@@ -20,7 +18,7 @@ var wavesurfer = WaveSurfer.create({
 console.log("Pog")
 //wavesurfer.load('../assets/Audio/birds.mp3');
 
-wavesurfer.load('../assets/Audio/birds.mp3')
+wavesurfer.load('/Audio/birds.mp3')
 
 
 
