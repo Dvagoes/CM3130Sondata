@@ -1,3 +1,7 @@
+html {
+    font-family: sans-serif;
+}
+
 .options_pane {
     width: auto;
     margin-left: 6px;
@@ -24,6 +28,10 @@ p{
 
 #drop_zone {
     border: 5px solid black;
-    width: 96px;
-    height: 96px;
+    width: 300px;
+    height: 100px;
+}
+
+#display_filename {
+    text-decoration: underline;
 }

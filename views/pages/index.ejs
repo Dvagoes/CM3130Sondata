@@ -3,16 +3,15 @@
 <html>
     
 <head>
-
-    <style src = "../assets/stylesheets/sound_workshop.css"></style>
-   <!--This is a link to the basic wavesurfer-->
-   <script src="https://unpkg.com/wavesurfer.js"></script>
-   <!--This is a link to the spectrogram plugin for wavesurfer-->
-   <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.spectrogram.js"></script>
+    <link rel="stylesheet" href="stylesheets/sound_workshop.css">
+    <!-- <link src = "stylesheets/sound_workshop.css"></style> -->
+    <!--This is a link to the basic wavesurfer-->
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <!--This is a link to the spectrogram plugin for wavesurfer-->
+    <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.spectrogram.js"></script>
    
-   <!--<script type="module" src="../assets/scripts/script.js"></script>
-   <script data-main="../assets/scripts/actualScripts/main" src="../assets/scripts/require.js"></script>-->
-
+    <!--<script type="module" src="../assets/scripts/script.js"></script>
+    <script data-main="../assets/scripts/actualScripts/main" src="../assets/scripts/require.js"></script>-->
 
 </head>
 
@@ -27,31 +26,42 @@
         <p>How to use the application</p>
     </div>
 
-    <!--
-        known issues with current form:
-        css doesn't appear to be working
-    -->
-
     <div id="upload_container">
         <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event)">
-
+             
             <label for="audio_upload">
                 Choose an Audio File:
             </label>
-
+            
             <div id="manual_file_select">
-                <form id="manual_file_select_form" onsubmit="formOnSubmit(event)">
+                <!-- 
+                    form displays file name as part of default HTML form functionality.
+                    it only works however when using the manual file selection.
+                    
+                    the form doesn't recognise the file when doing it by drag and drop.
 
-                    <input type="file" id="audio_upload" name="audio_upload" accept="audio/*">
+                    TODO: remove form filename display
+                 -->
+                <form id="manual_file_select_form">
 
-                    <button type="submit" value="Submit">Submit</button>
+                    <input type="file" id="audio_upload" name="audio_upload" accept="audio/*" onchange="formOnSubmit(event)">
 
+                    <!-- submit button removed due to redundancy -->
+                    <!-- <button type="submit" value="Submit">Submit</button> -->
+
+                    <!-- clear button currently has no functionality -->
                     <button type="submit" value="Clear">Clear</button>
 
                 </form>
+
             </div>
         </div>
+        <br>
+        <div id="display_filename">
+            
+        </div>
     </div>
+
 
     <div id="sound_workshop" style="width: 88%; margin-left: 6%;">
         <div id="visualiser" style="width: auto; margin: 6px;">
