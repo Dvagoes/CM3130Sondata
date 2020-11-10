@@ -3,7 +3,7 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-var upload = require("express-fileupload");
+//var upload = require("express-fileupload");
 const colormap = require('colormap');
 
 module.exports.colormap = colormap;
