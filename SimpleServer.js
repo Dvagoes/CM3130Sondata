@@ -14,7 +14,7 @@ module.exports.colormap = colormap;
 app.set('view engine', 'ejs');
 
 
-//const fs = require('fs');
+const fs = require('fs');
 //fs.writeFile('hot-colormap.json', JSON.stringify(colors));   
 
 app.get('/', function (req, res) {
@@ -25,11 +25,20 @@ app.get('/', function (req, res) {
 
 });
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: "50MB"}));
 
-app.post('/audio', function(req,res){
+// app.use(function (req, res){   
+//     res.setHeader('Content-Type', 'text/plain')
+//     res.write('you posted:\n')
+//     res.end(JSON.stringify(req.body, null, 2)) 
+// });
 
-})
+app.post('/audio',
+ function(req,res){
+    //res.send("<3");
+    console.log(req),
+    fs.writeFileSync("/assets/Audio")
+});
 
 // set up pathing for assets
 

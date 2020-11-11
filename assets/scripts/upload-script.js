@@ -12,6 +12,7 @@ var path = require('path');
 var router = express.Router();
 //var app = express();
 var ejs = require('ejs');
+const { json } = require('express');
 var upload = multer({storage: 'assets/Audio'})
 
 
@@ -59,15 +60,36 @@ function formOnSubmit(ev) {
  * currently it only gets the file details printed to console in json format.
  */
 function fileProcess(file) {
+    
+    
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "audio/mpeg");
+
+
+    // var requestOptions = {
+    //     method: 'POST',
+    //     headers: myHeaders,
+    //     body: JSON.stringify(file),
+    //     redirect: 'follow'
+    //   };
 
     console.log(file);
     let text = "Filename: "
     document.getElementById("display_filename").innerHTML = text + file.name;
 
-    fileUpload(file);    
+    let jsonfile = JSON.stringify(file);
+    console.log(jsonfile);
+
+    fetch('/audio', {
+        method: 'POST',
+        headers: myHeaders,
+        //body: `{"file":${jsonfile}}`,
+        body: file,
+        redirect: 'follow'
+    });
 }
 
-function fileUpload(file) {
+//function fileUpload(file) {
 
     //var express = require('express');
     //var app = express();
@@ -129,4 +151,4 @@ function fileUpload(file) {
     //     res.send('this is post route upload');
     // })
 
-}
+//}
