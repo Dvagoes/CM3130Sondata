@@ -15,6 +15,7 @@ app.set('view engine', 'ejs');
 
 
 const fs = require('fs');
+const { url } = require('inspector');
 //fs.writeFile('hot-colormap.json', JSON.stringify(colors));   
 
 app.get('/', function (req, res) {
@@ -25,31 +26,26 @@ app.get('/', function (req, res) {
 
 });
 
-app.use(bodyParser.json({limit: "50MB"}));
+//app.use(bodyParser.json({limit: "50MB"}));
+
+//var jsonParser = bodyParser.json();
+//var rawParser = bodyParser.raw();
+//var urlencodedParser = bodyParser.urlencoded({extended: false});
+
+var textParser = bodyParser.text();
 
 // more commented out code from previous attempt
 /**
 app.use(function (req, res){   
-     res.setHeader('Content-Type', 'text/plain')
-     res.write('you posted:\n')
+     res.setHeader('Content-Type', 'text/plain'),
+     res.write('you posted:\n'),
      res.end(JSON.stringify(req.body, null, 2)) 
  });
- */
+*/
 
-/**
- * console.log(req) on line:52
- * is used to print a JSON to the terminal detailing the uploaded file.
- * it is mostly useless information at the moment.
- * but in the bottom there should be a field named "body"
- * as of this current build. it would be emptty, it isn't supposed to be empty
- * it is supposed to contain a datastream. 
- * more details of this in the comments in upload-script.js on starting line: 95
- */
-
-
-app.post('/', function(req,res){
-    //res.send("<3"),
-    console.log(req)
+app.post('/', textParser, function(req,res){
+    console.log(req.body),
+    res.send("<3")
     //fs.writeFileSync("/assets/Audio")
 });
 

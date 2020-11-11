@@ -66,53 +66,78 @@ function formOnSubmit(ev) {
  * currently it only gets the file details printed to console in json format.
  */
 function fileProcess(file) {
-    
+
+    postmanTest(file);
+
+    /*
     var reader = new FileReader();
 
     var myHeaders = new Headers();
 
-    myHeaders.append("Content-Type", "audio/mpeg");
+    var formData = new FormData();
 
-    //variable commented out due to being obsolete
-    /**
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: JSON.stringify(file),
-        redirect: 'follow'
-      };
-    */
+    myHeaders.append("Content-Type", "*");
+
     console.log(file);
     let text = "Filename: "
     document.getElementById("display_filename").innerHTML = text + file.name;
 
-    let jsonfile = JSON.stringify(file);
+    //let jsonfile = JSON.stringify(file);
+    
     //let jsonfile = reader.readAsDataURL(file);
     //console.log(jsonfile);
 
     //console.log(reader.readAsDataURL(file));
 
-/**
- * the body field in the fetch method below is meant to contain a "datastream."
- * 
- * A datastream being the pure binary data from the audio file. it should just look like a mess of chracters
- * 
- * If you want to know what a datastream from an audio file looks like. try to open an audio file
- * using notepad.
- * 
- * anyway as of this current commit there hasn't been any solutions to getting the datastream in the body field of the uploaded file json
- * 
- * in order to get the datastream into the body:
- * the datastream needs to be inserted into the body: field found on line 113 here:
- */
+    formData.append("file", file);
 
-    fetch('/', {
+    file.arrayBuffer().then(buffer => {
+        let jsonfile = JSON.stringify({"file": buffer});
+        console.log(buffer);
+        fetch('/', {
+            method: 'POST',
+            headers: myHeaders,
+            //body: `{"file": "<3"}`,
+            //body: `{"file":${buffer}}`,
+            body: buffer,
+            redirect: 'follow'
+        });
+    })
+    */
+}
+
+function postmanTest(file){
+    
+    var reader = new FileReader();
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "text/plain");
+
+    reader.readAsArrayBuffer(file);
+
+    var raw = reader.result;
+
+    file.arrayBuffer().then(buffer => {
+        console.log(buffer); 
+
+        var base64 = window.btoa(
+            new Uint8Array(buffer)
+              .reduce((data, byte) => data + String.fromCharCode(byte), '')
+        );
+        console.log(base64);
+        var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        //body: `{"file":${jsonfile}}`,
-        body: reader.readAsDataURL(file),
+        body: base64,
         redirect: 'follow'
-    });
+        };
+
+        // fetch("/", requestOptions)
+        // .then(response => response.text())
+        // .then(result => console.log(result))
+        // .catch(error => console.log('error', error));
+    })
+
 }
 
 //code below from previous attempts of implementing file uploading
