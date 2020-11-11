@@ -74,37 +74,25 @@
         //document.getElementById("op_left").addEventListener("click", nextPane(-1));
         //document.getElementById("op_right").addEventListener("click", nextPane(1));
 
-        var slot1, slot2;
+        var n = 0;
         var curPane = document.getElementsByClassName("on")[0];
-        slot1 = curPane.firstChild;
-        slot2 = curPane.lastChild;
 
-        var sld1 = slot1.firstChild;
-        var box1 = slot1.lastChild;
-        var sld2 = slot2.firstChild;
-        var box2 = slot2.lastChild;
+        sliders = document.getElementsByClassName("slider");
+        boxes = document.getElementsByClassName("range_num");
 
-        sld1.oninput = function () {
-            box1.value = this.value;
-        }
-        box1.oninput = function () {
-            sld1.value = this.value;
-        }
-
-        var sld2 = slot2.firstChild;
-        var box2 = slot2.lastChild;
-
-        sld2.oninput = function () {
-            box2.value = this.value;
-        }
-        box2.oninput = function () {
-            sld2.value = this.value;
+        for (var i = 0; i < sliders.length; i++) {
+            sld[i].oninput = function () {
+                box[i].value = this.value;
+            }
+            box[i].oninput = function () {
+                sld[i].value = this.value;
+            }
         }
 
 
         function nextPane(a) {
             var elm = document.getElementsByClassName("on")[0].id;
-            var n = parseInt(elm.charAt(elm.length - 1));
+            n = parseInt(elm.charAt(elm.length - 1));
             var start = document.getElementsByClassName("on")[0];
             start.classList.add("off");
             start.classList.remove("on");
@@ -112,7 +100,7 @@
             if (n > 0) {
                 n = n + a;
             } else if (n > 1) {
-
+                n = 0;
             } else {
                 n = 1;
             }
@@ -120,17 +108,6 @@
             curPane = document.getElementById("options_" + n);
             curPane.classList.add("on");
             curPane.classList.remove("off");
-
-
-            slot1 = curPane.firstChild;
-            slot2 = curPane.lastChild;
-
-            sld1 = slot1.firstChild;
-            box1 = slot1.lastChild;
-            sld2 = slot2.firstChild;
-            box2 = slot2.lastChild;
-
-
         }
     </script>
 
