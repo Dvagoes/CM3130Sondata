@@ -66,46 +66,39 @@ function formOnSubmit(ev) {
  * currently it only gets the file details printed to console in json format.
  */
 function fileProcess(file) {
-
-    postmanTest(file);
-
-    /*
     var reader = new FileReader();
 
     var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "text/plain");
 
-    var formData = new FormData();
+    reader.readAsArrayBuffer(file);
 
-    myHeaders.append("Content-Type", "*");
-
-    console.log(file);
-    let text = "Filename: "
-    document.getElementById("display_filename").innerHTML = text + file.name;
-
-    //let jsonfile = JSON.stringify(file);
-    
-    //let jsonfile = reader.readAsDataURL(file);
-    //console.log(jsonfile);
-
-    //console.log(reader.readAsDataURL(file));
-
-    formData.append("file", file);
+    var raw = reader.result;
 
     file.arrayBuffer().then(buffer => {
-        let jsonfile = JSON.stringify({"file": buffer});
-        console.log(buffer);
-        fetch('/', {
-            method: 'POST',
-            headers: myHeaders,
-            //body: `{"file": "<3"}`,
-            //body: `{"file":${buffer}}`,
-            body: buffer,
-            redirect: 'follow'
-        });
-    })
-    */
-}
+        console.log(buffer); 
 
+        var base64 = window.btoa(
+            new Uint8Array(buffer)
+              .reduce((data, byte) => data + String.fromCharCode(byte), '')
+        );
+        console.log(base64);
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: base64,
+        redirect: 'follow'
+        };
+
+        fetch("/", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+    })
+
+    
+}
+/**
 function postmanTest(file){
     
     var reader = new FileReader();
@@ -139,7 +132,7 @@ function postmanTest(file){
     })
 
 }
-
+*/
 //code below from previous attempts of implementing file uploading
 /**
 function fileUpload(file) {

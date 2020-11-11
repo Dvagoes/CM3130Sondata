@@ -32,7 +32,7 @@ app.get('/', function (req, res) {
 //var rawParser = bodyParser.raw();
 //var urlencodedParser = bodyParser.urlencoded({extended: false});
 
-var textParser = bodyParser.text();
+var textParser = bodyParser.text({limit: "50MB"});
 
 // more commented out code from previous attempt
 /**
@@ -44,9 +44,9 @@ app.use(function (req, res){
 */
 
 app.post('/', textParser, function(req,res){
-    console.log(req.body),
-    res.send("<3")
-    //fs.writeFileSync("/assets/Audio")
+    //console.log(req.body),
+    res.send("<3"),
+    fs.writeFileSync("./assets/Audio/sound.mp3", req.body)
 });
 
 // set up pathing for assets
