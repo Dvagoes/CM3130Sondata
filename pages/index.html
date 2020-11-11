@@ -85,20 +85,20 @@
         var box2 = slot2.lastChild;
 
         sld1.oninput = function () {
-            box1.value = sld1.value;
+            box1.value = this.value;
         }
         box1.oninput = function () {
-            sld1.value = box1.value;
+            sld1.value = this.value;
         }
 
         var sld2 = slot2.firstChild;
         var box2 = slot2.lastChild;
 
         sld2.oninput = function () {
-            box2.value = sld2.value;
+            box2.value = this.value;
         }
         box2.oninput = function () {
-            sld2.value = box2.value;
+            sld2.value = this.value;
         }
 
 
