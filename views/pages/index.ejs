@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    <link rel="stylesheet" href="stylesheets/sound_workshop.css">
+    <!-- <link src = "stylesheets/sound_workshop.css"></style> -->
+    <!--This is a link to the basic wavesurfer-->
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <!--This is a link to the spectrogram plugin for wavesurfer-->
+    <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.spectrogram.js"></script>
+   
+    <!--<script type="module" src="../assets/scripts/script.js"></script>
+    <script data-main="../assets/scripts/actualScripts/main" src="../assets/scripts/require.js"></script>-->
+
+</head>
+
+<body>
+
+    <div id="navbar">
+    
+    </div>
+
+    <div id="text_container">
+        <h2>Sound Workshop</h2>
+        <p>How to use the application</p>
+    </div>
+
+    <div id="upload_container">
+        <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event)">
+             
+            <label for="audio_upload">
+                Choose an Audio File:
+            </label>
+            
+            <div id="manual_file_select">
+                <!-- 
+                    form displays file name as part of default HTML form functionality.
+                    it only works however when using the manual file selection.
+                    
+                    the form doesn't recognise the file when doing it by drag and drop.
+
+                    TODO: remove form filename display
+                 -->
+                <form id="manual_file_select_form" method="POST">
+
+                    <input type="file" id="audio_upload" name="audio_upload" accept="audio/*" onchange="formOnSubmit(event)">
+
+                    <!-- submit button removed due to redundancy -->
+                    <!-- <button type="submit" value="Submit">Submit</button> -->
+
+                    <!-- clear button currently has no functionality -->
+                    <button type="submit" value="Clear">Clear</button>
+
+                </form>
+
+            </div>
+        </div>
+        <br>
+        <div id="display_filename">
+            
+        </div>
+    </div>
+
+
+    <div id="sound_workshop" style="width: 88%; margin-left: 6%;">
+        <div id="visualiser" style="width: auto; margin: 6px;">
+            <div id="player">
+
+            </div>
+            <div id="visual_output">
+                
+            </div>
+
+            <div id = "wave-spectrogram">
+
+
+            </div>
+
+        </div>
+        <div id="option_container">
+            <div id="option_switch">
+                <input id="op_left" class="op_switch" type="button">
+                <input id="op-right" class="op_switch" type="button" style = "float: right;">
+            </div>
+            <div id="options_0" class="options_pane"> <!-- have divs that get removed and replace eachother -->
+
+            </div>
+            <div id="options_1" class="options_pane">
+
+            </div>
+            <div id="options_2" class="options_pane">
+
+            </div>
+            <div id="options_3" class="options_pane">
+                
+            </div>
+            <div id="options_4" class="options_pane">
+                
+            </div>
+            <div id="options_5" class="options_pane">
+                
+            </div>
+        </div>
+    </div>
+    
+    <!-- <script src = "/scripts/script.js"></script> -->
+
+    <!--upload-script.js contains code for uploading files.-->
+    <script src = "/scripts/upload-script.js"></script>
+
+    
+
+</body>
+
+</html>
