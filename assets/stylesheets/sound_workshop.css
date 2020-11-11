@@ -4,8 +4,16 @@
     margin-right: 6px;
     margin-bottom: 6px;
 
+}
+
+.off {
     display: none;
 }
+
+.on {
+    display: block;
+}
+
 
 .option_switch {
     width: auto;

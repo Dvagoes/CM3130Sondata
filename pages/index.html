@@ -25,11 +25,15 @@
             </div>
         </div>
         <div class="option_container">
+
             <div class="option_switch">
                 <input id="op_left" class="op_switch" type="button">
                 <input id="op-right" class="op_switch" type="button" style = "float: right;">
             </div>
-            <div id="options_0" class="options_pane" style="display: inline-block !important;"> <!-- have divs that get removed and replace eachother -->
+
+            <!-- have divs that get removed and replace eachother -->
+
+            <div id="options_0" class="options_pane on"> 
                 <div class="slider_slot">
                     <input class="slider" type="range"><input class="range_num" type="number">
                 </div>
@@ -37,7 +41,7 @@
                     <input class="slider" type="range"><input class="range_num" type="number">
                 </div>
             </div>
-            <div id="options_1" class="options_pane">
+            <div id="options_1" class="options_pane off">
                 <div class="slider_slot">
                     <input class="slider" type="range"><input class="range_num" type="number">
                 </div>
@@ -45,19 +49,41 @@
                     <input class="slider" type="range"><input class="range_num" type="number">
                 </div>
             </div>
-            <!--<div id="options_2" class="options_pane">
+            <!--<div id="options_2" class="options_pane off">
 
             </div>
-            <div id="options_3" class="options_pane">
+            <div id="options_3" class="options_pane off">
                 
             </div>
-            <div id="options_4" class="options_pane">
+            <div id="options_4" class="options_pane off">
                 
             </div>
-            <div id="options_5" class="options_pane">
+            <div id="options_5" class="options_pane off">
                 
             </div>-->
         </div>
     </div>
-    
+
+    <script>
+        document.getElementById("op_left").addEventListener("click", nextPane(-1));
+        document.getElementById("op_right").addEventListener("click", nextPane(1));
+
+        function nextPane(a) {
+            var elm = document.getElementsByClassName("on")[0].id;
+            var n = parseInt(elm.charAt(elm.length-1));
+            document.getElementsByClassName("on").classList.add("off");
+            document.getElementsByClassName("on").classList.remove("on");
+
+            if (n>0) {
+                n = n+a;
+            } else {
+                n = 1
+            }
+
+            document.getElementById("options_"+n).classList.add("on");
+            document.getElementById("options_"+n).classList.remove("off");
+            
+        }
+    </script>
+
 </body>
