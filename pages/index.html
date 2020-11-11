@@ -71,7 +71,7 @@
         document.getElementById("op_right").addEventListener("click", nextPane(1));
 
         var slot1, slot2;
-        var curPane = document.getElementByClassName("on");
+        var curPane = document.getElementsByClassName("on")[0];
         slot1 = curPane.firstChild;
         slot2 = curPane.lastChild;
 
@@ -85,7 +85,8 @@
         }
 
         var sld2 = slot2.firstChild;
-        var box2 = slot2.lastChild
+        var box2 = slot2.lastChild;
+
         sld2.oninput = function(){
             box2.value = sld2.value;
         }
@@ -94,9 +95,9 @@
         }
 
         function nextPane(a) {
-            var elm = document.getElementByClassName("on").id;
+            var elm = document.getElementsByClassName("on")[0].id;
             var n = parseInt(elm.charAt(elm.length-1));
-            var start = document.getElementByClassName("on")
+            var start = document.getElementsByClassName("on")[0];
             start.classList.add("off");
             start.classList.remove("on");
 
@@ -108,18 +109,18 @@
                 n = 1;
             }
 
-            var end = document.getElementById("options_"+n)
-            end.classList.add("on");
-            end.classList.remove("off");
+            curPane = document.getElementById("options_"+n);
+            curPane.classList.add("on");
+            curPane.classList.remove("off");
 
-            curPane = end;
+            
             slot1 = curPane.firstChild;
             slot2 = curPane.lastChild;
 
             sld1 = slot1.firstChild;
-            box1 = slot1.lastChild
+            box1 = slot1.lastChild;
             sld2 = slot2.firstChild;
-            box2 = slot2.lastChild            
+            box2 = slot2.lastChild;            
         }
     </script>
 
