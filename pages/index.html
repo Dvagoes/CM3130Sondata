@@ -34,19 +34,21 @@
             <!-- have divs that get removed and replace eachother -->
 
             <div id="options_0" class="options_pane on"> 
+                <h3 style="margin-left: auto;">Option pane 0</h3>
                 <div class="slider_slot">
-                    <input class="slider" type="range"><input class="range_num" type="number">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num" type="number" min="-100" max="100" value="0">
                 </div>
                 <div class="slider_slot">
-                    <input class="slider" type="range"><input class="range_num" type="number">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num" type="number" min="-100" max="100" value="0">
                 </div>
             </div>
             <div id="options_1" class="options_pane off">
+                <h3 style="margin-left: auto;">Option pane 0</h3>
                 <div class="slider_slot">
-                    <input class="slider" type="range"><input class="range_num" type="number">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num" type="number" min="-100" max="100" value="0">
                 </div>
                 <div class="slider_slot">
-                    <input class="slider" type="range"><input class="range_num" type="number">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num" type="number" min="-100" max="100" value="0">
                 </div>
             </div>
             <!--<div id="options_2" class="options_pane off">
@@ -68,20 +70,58 @@
         document.getElementById("op_left").addEventListener("click", nextPane(-1));
         document.getElementById("op_right").addEventListener("click", nextPane(1));
 
+        var slot1, slot2;
+        var curPane = document.getElementsByClassName("on");
+        slot1 = curPane.firstChild;
+        slot2 = curPane.lastChild;
+
+        var sld1 = slot1.firstChild;
+        var box1 = slot1.lastChild
+        sld1.oninput = function(){
+            box1.value = sld1.value;
+        }
+        box1.oninput = function(){
+            sld1.value = box1.value;
+        }
+
+        var sld2 = slot2.firstChild;
+        var box2 = slot2.lastChild
+        sld2.oninput = function(){
+            box2.value = sld2.value;
+        }
+        box2.oninput = function(){
+            sld2.value = box2.value;
+        }
+
         function nextPane(a) {
             var elm = document.getElementsByClassName("on")[0].id;
             var n = parseInt(elm.charAt(elm.length-1));
-            document.getElementsByClassName("on").classList.add("off");
-            document.getElementsByClassName("on").classList.remove("on");
+            var start = document.getElementsByClassName("on")
+            start.classList.add("off");
+            start.classList.remove("on");
 
             if (n>0) {
                 n = n+a;
+            } else if (n>1) {
+
             } else {
-                n = 1
+                n = 1;
             }
 
-            document.getElementById("options_"+n).classList.add("on");
-            document.getElementById("options_"+n).classList.remove("off");
+            var end = document.getElementById("options_"+n)
+            end.classList.add("on");
+            end.classList.remove("off");
+            
+            curPane = end;
+            slot1 = curPane.firstChild;
+            slot2 = curPane.lastChild;
+
+            sld1 = slot1.firstChild;
+            box1 = slot1.lastChild
+            sld2 = slot2.firstChild;
+            box2 = slot2.lastChild
+
+            
             
         }
     </script>
