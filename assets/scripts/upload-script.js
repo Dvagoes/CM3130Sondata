@@ -1,20 +1,25 @@
-//following code is taken from https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
 //currently early implementation subject to changes later
-
 
 //to get file drag and drop working. you need to drag the file over "Choose an Audio File" on the webpage
 
-// ignore commented code for now
+/**
+ * intermittent commenting are from temporary solutions that may come useful later
+ * (most likeley not though)
+ * 
+ * TODO: get file upload functioning by getting 'datastreams' into the body field of the uploaded file json
+ *      -currently haven't figured out yet
+ */
 
 //var express = require('express');
-var multer = require('multer');
-var path = require('path');
+//var multer = require('multer');
+//var path = require('path');
 var router = express.Router();
 //var app = express();
 var ejs = require('ejs');
-const { json } = require('express');
+//const { json } = require('express');
 var upload = multer({storage: 'assets/Audio'})
 
+//following code is taken from https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
 
 function dropHandler(ev) {
     console.log('File(s) dropped');
@@ -62,94 +67,117 @@ function formOnSubmit(ev) {
  */
 function fileProcess(file) {
     
-    
+    var reader = new FileReader();
+
     var myHeaders = new Headers();
+
     myHeaders.append("Content-Type", "audio/mpeg");
 
-
-    // var requestOptions = {
-    //     method: 'POST',
-    //     headers: myHeaders,
-    //     body: JSON.stringify(file),
-    //     redirect: 'follow'
-    //   };
-
+    //variable commented out due to being obsolete
+    /**
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(file),
+        redirect: 'follow'
+      };
+    */
     console.log(file);
     let text = "Filename: "
     document.getElementById("display_filename").innerHTML = text + file.name;
 
     let jsonfile = JSON.stringify(file);
-    console.log(jsonfile);
+    //let jsonfile = reader.readAsDataURL(file);
+    //console.log(jsonfile);
 
-    fetch('/audio', {
+    //console.log(reader.readAsDataURL(file));
+
+/**
+ * the body field in the fetch method below is meant to contain a "datastream."
+ * 
+ * A datastream being the pure binary data from the audio file. it should just look like a mess of chracters
+ * 
+ * If you want to know what a datastream from an audio file looks like. try to open an audio file
+ * using notepad.
+ * 
+ * anyway as of this current commit there hasn't been any solutions to getting the datastream in the body field of the uploaded file json
+ * 
+ * in order to get the datastream into the body:
+ * the datastream needs to be inserted into the body: field found on line 113 here:
+ */
+
+    fetch('/', {
         method: 'POST',
         headers: myHeaders,
         //body: `{"file":${jsonfile}}`,
-        body: file,
+        body: reader.readAsDataURL(file),
         redirect: 'follow'
     });
 }
 
-//function fileUpload(file) {
+//code below from previous attempts of implementing file uploading
+/**
+function fileUpload(file) {
 
-    //var express = require('express');
-    //var app = express();
+    var express = require('express');
+    var app = express();
 
-    //app.post(null, upload.single('file'), function(req,res,next){
+    app.post(null, upload.single('file'), function(req,res,next){
 
-    //});
+    });
 
-    //app.post('')
+    app.post('')
 
 
-    //============================================
+    ============================================
     
-    // var uploads = multer({dest: './assets/Audio'});
+    var uploads = multer({dest: './assets/Audio'});
 
-    // router.post('/register', uploads.single(this.file), function(req,res,next){
-    //     if (req.file){
-    //         console.log('audio uploaded');
-    //     }
-    // });
+    router.post('/register', uploads.single(this.file), function(req,res,next){
+        if (req.file){
+            console.log('audio uploaded');
+        }
+    });
 
-    //===========================================
+    ===========================================
 
-    // var storage = multer.diskStorage({
-    //     destination: function(req,file,callback){
-    //         callback(null, './assets/Audio');
-    //     },
-    //     filename:function(req,file,callback){
-    //         callback(null, file.fieldname);
-    //     }
+    var storage = multer.diskStorage({
+        destination: function(req,file,callback){
+            callback(null, './assets/Audio');
+        },
+        filename:function(req,file,callback){
+            callback(null, file.fieldname);
+        }
 
-    // })
+    })
 
-    // var upload = multer({storage:storage});
-    // app.get(null, function(req,res){
-    //     res.sendFile('./assets/Audio')
-    // });
-    // app.post(null, upload.single(this.file),function(req,res){
-    //     console.log(req.file);
-    //     console.log(req.file.path);
-    // });
+    var upload = multer({storage:storage});
+    app.get(null, function(req,res){
+        res.sendFile('./assets/Audio')
+    });
+    app.post(null, upload.single(this.file),function(req,res){
+        console.log(req.file);
+        console.log(req.file.path);
+    });
 
 
-    // const multer = require("multer");
-    // const multerConf = {
-    //     storage : multer.diskStorage({
-    //         destination : function(req, file, next) {
-    //             next(null, './assets/Audio');
-    //         },
-    //         filename: function(req,file,next){
-    //             const ext = file.mimetype.split('/'[1]);
-    //             next(null, audio + ext)
-    //             console.log(file);
-    //         }
-    //     })
-    // }
+    const multer = require("multer");
+    const multerConf = {
+        storage : multer.diskStorage({
+            destination : function(req, file, next) {
+                next(null, './assets/Audio');
+            },
+            filename: function(req,file,next){
+                const ext = file.mimetype.split('/'[1]);
+                next(null, audio + ext)
+                console.log(file);
+            }
+        })
+    }
 
-    // router.post('/upload',multer(multerConf).single('audio'), function(req,res){
-    //     res.send('this is post route upload');
-    // })
+    router.post('/upload',multer(multerConf).single('audio'), function(req,res){
+        res.send('this is post route upload');
+    })
 
-//}
+}
+*/
