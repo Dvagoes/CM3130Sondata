@@ -7,7 +7,7 @@
 <body>
 
     <div id="navbar">
-    
+
     </div>
 
     <div id="text_container">
@@ -21,34 +21,38 @@
 
             </div>
             <div id="visual_output">
-                
+
             </div>
         </div>
         <div class="option_container">
 
             <div class="option_switch">
                 <input id="op_left" class="op_switch" type="button">
-                <input id="op_right" class="op_switch" type="button" style = "float: right;">
+                <input id="op_right" class="op_switch" type="button" style="float: right;">
             </div>
 
             <!-- have divs that get removed and replace eachother -->
 
-            <div id="options_0" class="options_pane on"> 
+            <div id="options_0" class="options_pane on">
                 <h3>Option pane 0</h3>
                 <div class="slider_slot">
-                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num" type="number" min="-100" max="100" value="0">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
+                        type="number" min="-100" max="100" value="0">
                 </div>
                 <div class="slider_slot">
-                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num" type="number" min="-100" max="100" value="0">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
+                        type="number" min="-100" max="100" value="0">
                 </div>
             </div>
             <div id="options_1" class="options_pane off">
                 <h3>Option pane 1</h3>
                 <div class="slider_slot">
-                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num" type="number" min="-100" max="100" value="0">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
+                        type="number" min="-100" max="100" value="0">
                 </div>
                 <div class="slider_slot">
-                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num" type="number" min="-100" max="100" value="0">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
+                        type="number" min="-100" max="100" value="0">
                 </div>
             </div>
             <!-- <div id="options_2" class="options_pane off">
@@ -79,52 +83,54 @@
         var box1 = slot1.lastChild;
         var sld2 = slot2.firstChild;
         var box2 = slot2.lastChild;
-        
+
+        sld1.oninput = function () {
+            box1.value = sld1.value;
+        }
+        box1.oninput = function () {
+            sld1.value = box1.value;
+        }
+
+        var sld2 = slot2.firstChild;
+        var box2 = slot2.lastChild;
+
+        sld2.oninput = function () {
+            box2.value = sld2.value;
+        }
+        box2.oninput = function () {
+            sld2.value = box2.value;
+        }
+
 
         function nextPane(a) {
             var elm = document.getElementsByClassName("on")[0].id;
-            var n = parseInt(elm.charAt(elm.length-1));
+            var n = parseInt(elm.charAt(elm.length - 1));
             var start = document.getElementsByClassName("on")[0];
             start.classList.add("off");
             start.classList.remove("on");
 
-            if (n>0) {
-                n = n+a;
-            } else if (n>1) {
+            if (n > 0) {
+                n = n + a;
+            } else if (n > 1) {
 
             } else {
                 n = 1;
             }
 
-            curPane = document.getElementById("options_"+n);
+            curPane = document.getElementById("options_" + n);
             curPane.classList.add("on");
             curPane.classList.remove("off");
 
-            
+
             slot1 = curPane.firstChild;
             slot2 = curPane.lastChild;
 
             sld1 = slot1.firstChild;
             box1 = slot1.lastChild;
             sld2 = slot2.firstChild;
-            box2 = slot2.lastChild; 
+            box2 = slot2.lastChild;
 
-            sld1.oninput = function(){
-                box1.value = sld1.value;
-            }
-            box1.oninput = function(){
-                sld1.value = box1.value;
-            }
 
-            var sld2 = slot2.firstChild;
-            var box2 = slot2.lastChild;
-
-            sld2.oninput = function(){
-                box2.value = sld2.value;
-            }
-            box2.oninput = function(){
-                sld2.value = box2.value;
-            }           
         }
     </script>
 
