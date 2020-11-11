@@ -101,8 +101,8 @@ function fileProcess(file) {
 
 function createSpectrogram(file) {
     
-    var alreadyRunning = false;
-    if (!alreadyRunning) {
+    //var alreadyRunning = false;
+    
         var wavesurfer = WaveSurfer.create({
             
             container: '#visual_output',
@@ -119,14 +119,14 @@ function createSpectrogram(file) {
         });
         wavesurfer.spectrogram
         alreadyRunning = true;
-
-    }
     //wavesurfer.load('../assets/Audio/birds.mp3');
 
     wavesurfer.loadBlob(file);
 
     
-    document.getElementById('visual_output').style.visibility = "hidden";
+    //document.getElementById('visual_output').style.visibility = "hidden";
+
+    //document.getElementById('wave').style.display = "none";
 }
 
 /**
