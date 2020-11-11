@@ -47,6 +47,7 @@ function dragOverHandler(ev) {
 
 function formOnSubmit(ev) {
     ev.preventDefault();
+    console.log(ev);
     // let el = document.getElementById("audio_upload");
     let file = ev.target.files[0];
     //console.log(el.files);

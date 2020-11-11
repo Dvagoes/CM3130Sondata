@@ -35,9 +35,9 @@ app.use(bodyParser.json({limit: "50MB"}));
 
 app.post('/audio',
  function(req,res){
-    //res.send("<3");
-    console.log(req),
-    fs.writeFileSync("/assets/Audio")
+    res.send("<3"),
+    console.log(req)
+    //fs.writeFileSync("/assets/Audio")
 });
 
 // set up pathing for assets
