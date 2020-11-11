@@ -7,11 +7,25 @@ html {
     margin-left: 6px;
     margin-right: 6px;
     margin-bottom: 6px;
+
 }
 
-#option_switch {
+.off {
+    display: none;
+}
+
+.on {
+    display: block;
+}
+
+
+.option_switch {
     width: auto;
     margin: 6px;
+}
+
+.option_container {
+    width: auto;
 }
 
 .op_switch {
@@ -40,3 +54,20 @@ p{
     display: none;
 
 } */
+.slider {
+    width: 60%;
+    margin: 5%;
+}
+
+.rang_num {
+    width: 20%;
+    margin-right: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    float: right;
+}
+
+h3 {
+    margin-left: auto;
+    margin-right: auto;
+}
