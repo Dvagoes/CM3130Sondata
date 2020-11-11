@@ -17,3 +17,13 @@
     height: 40px;
     margin: 0px;
 }
+
+.slider {
+    width: 60%;
+    padding: 5%;
+}
+
+.rang_num {
+    width: 20%;
+    padding: 5%;
+}
