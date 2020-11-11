@@ -81,11 +81,11 @@
         boxes = document.getElementsByClassName("range_num");
 
         for (var i = 0; i < sliders.length; i++) {
-            sld[i].oninput = function () {
-                box[i].value = this.value;
+            sliders[i].oninput = function () {
+                boxes[i].value = this.value;
             }
-            box[i].oninput = function () {
-                sld[i].value = this.value;
+            boxes[i].oninput = function () {
+                sliders[i].value = this.value;
             }
         }
 
