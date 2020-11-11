@@ -3,6 +3,8 @@
     margin-left: 6px;
     margin-right: 6px;
     margin-bottom: 6px;
+
+    display: none;
 }
 
 #option_switch {
