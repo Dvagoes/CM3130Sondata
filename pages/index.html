@@ -71,7 +71,7 @@
         document.getElementById("op_right").addEventListener("click", nextPane(1));
 
         var slot1, slot2;
-        var curPane = document.getElementsByClassName("on");
+        var curPane = document.getElementByClassName("on");
         slot1 = curPane.firstChild;
         slot2 = curPane.lastChild;
 
@@ -94,9 +94,9 @@
         }
 
         function nextPane(a) {
-            var elm = document.getElementsByClassName("on")[0].id;
+            var elm = document.getElementByClassName("on").id;
             var n = parseInt(elm.charAt(elm.length-1));
-            var start = document.getElementsByClassName("on")
+            var start = document.getElementByClassName("on")
             start.classList.add("off");
             start.classList.remove("on");
 
@@ -111,7 +111,7 @@
             var end = document.getElementById("options_"+n)
             end.classList.add("on");
             end.classList.remove("off");
-            
+
             curPane = end;
             slot1 = curPane.firstChild;
             slot2 = curPane.lastChild;
