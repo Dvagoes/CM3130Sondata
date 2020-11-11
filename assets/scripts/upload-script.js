@@ -21,6 +21,7 @@ var upload = multer({storage: 'assets/Audio'})
 
 //following code is taken from https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
 
+
 function dropHandler(ev) {
     console.log('File(s) dropped');
 
@@ -92,12 +93,42 @@ function fileProcess(file) {
 
         fetch("/", requestOptions)
         .then(response => response.text())
+        .then(response => createSpectrogram(file))
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
     })
+}
+
+function createSpectrogram(file) {
+    
+    var alreadyRunning = false;
+    if (!alreadyRunning) {
+        var wavesurfer = WaveSurfer.create({
+            
+            container: '#visual_output',
+            waveColor: 'red',
+            progressColor: 'purple',
+
+            plugins: [
+                window.WaveSurfer.spectrogram.create({
+                    wavesurfer: wavesurfer,
+                    container: "#wave-spectrogram",
+                    //colorMap: colormap
+                })
+            ]
+        });
+        wavesurfer.spectrogram
+        alreadyRunning = true;
+
+    }
+    //wavesurfer.load('../assets/Audio/birds.mp3');
+
+    wavesurfer.loadBlob(file);
 
     
+    document.getElementById('visual_output').style.visibility = "hidden";
 }
+
 /**
 function postmanTest(file){
     

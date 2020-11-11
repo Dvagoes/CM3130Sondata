@@ -25,6 +25,8 @@ console.log("Javascript is working")
 
 */
 
+/**
+function createSpectrogram() {
     var wavesurfer = WaveSurfer.create({
 
         container: '#visual_output',
@@ -41,7 +43,9 @@ console.log("Javascript is working")
     });
     //wavesurfer.load('../assets/Audio/birds.mp3');
 
-    wavesurfer.load('/Audio/birds.mp3')
+    wavesurfer.load('/Audio/sound.mp3')
 
     wavesurfer.spectrogram
     document.getElementById('visual_output').style.visibility = "hidden";
+}
+*/
