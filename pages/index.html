@@ -80,14 +80,31 @@
         sliders = document.getElementsByClassName("slider");
         boxes = document.getElementsByClassName("range_num");
 
-        for (var i = 0; i < sliders.length; i++) {
-            sliders[i].oninput = function () {
-                boxes[i].value = this.value;
-            }
-            boxes[i].oninput = function () {
-                sliders[i].value = this.value;
-            }
+        sliders[0].oninput = function () {
+            boxes[0].value = this.value;
         }
+        boxes[0].oninput = function () {
+            sliders[0].value = this.value;
+        }
+        sliders[1].oninput = function () {
+            boxes[1].value = this.value;
+        }
+        boxes[1].oninput = function () {
+            sliders[1].value = this.value;
+        }
+        sliders[2].oninput = function () {
+            boxes[2].value = this.value;
+        }
+        boxes[2].oninput = function () {
+            sliders[2].value = this.value;
+        }
+        sliders[3].oninput = function () {
+            boxes[3].value = this.value;
+        }
+        boxes[3].oninput = function () {
+            sliders[3].value = this.value;
+        }
+        
 
 
         function nextPane(a) {
