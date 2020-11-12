@@ -78,35 +78,109 @@
             </div>
 
         </div>
-        <div id="option_container">
-            <div id="option_switch">
+        <div class="option_container">
+
+            <div class="option_switch">
                 <input id="op_left" class="op_switch" type="button">
-                <input id="op-right" class="op_switch" type="button" style = "float: right;">
+                <input id="op_right" class="op_switch" type="button" style="float: right;">
             </div>
-            <div id="options_0" class="options_pane"> <!-- have divs that get removed and replace eachother -->
+
+            <!-- have divs that get removed and replace eachother -->
+
+            <div id="options_0" class="options_pane on">
+                <h3>Option pane 0</h3>
+                <div class="slider_slot">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
+                        type="number" min="-100" max="100" value="0">
+                </div>
+                <div class="slider_slot">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
+                        type="number" min="-100" max="100" value="0">
+                </div>
+            </div>
+            <div id="options_1" class="options_pane off">
+                <h3>Option pane 1</h3>
+                <div class="slider_slot">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
+                        type="number" min="-100" max="100" value="0">
+                </div>
+                <div class="slider_slot">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
+                        type="number" min="-100" max="100" value="0">
+                </div>
+            </div>
+            <!-- <div id="options_2" class="options_pane off">
 
             </div>
-            <div id="options_1" class="options_pane">
-
-            </div>
-            <div id="options_2" class="options_pane">
-
-            </div>
-            <div id="options_3" class="options_pane">
+            <div id="options_3" class="options_pane off">
                 
             </div>
-            <div id="options_4" class="options_pane">
+            <div id="options_4" class="options_pane off">
                 
             </div>
-            <div id="options_5" class="options_pane">
+            <div id="options_5" class="options_pane off">
                 
-            </div>
+            </div> -->
         </div>
     </div>
-    
-    <!-- <script src = "/scripts/script.js"></script> -->
 
-    <!--upload-script.js contains code for uploading files.-->
+    <script>
+        //document.getElementById("op_left").addEventListener("click", nextPane(-1));
+        //document.getElementById("op_right").addEventListener("click", nextPane(1));
+
+        var n = 0;
+        var curPane = document.getElementsByClassName("on")[0];
+
+        sliders = document.getElementsByClassName("slider");
+        boxes = document.getElementsByClassName("range_num");
+
+        sliders[0].oninput = function () {
+            boxes[0].value = this.value;
+        }
+        boxes[0].oninput = function () {
+            sliders[0].value = this.value;
+        }
+        sliders[1].oninput = function () {
+            boxes[1].value = this.value;
+        }
+        boxes[1].oninput = function () {
+            sliders[1].value = this.value;
+        }
+        sliders[2].oninput = function () {
+            boxes[2].value = this.value;
+        }
+        boxes[2].oninput = function () {
+            sliders[2].value = this.value;
+        }
+        sliders[3].oninput = function () {
+            boxes[3].value = this.value;
+        }
+        boxes[3].oninput = function () {
+            sliders[3].value = this.value;
+        }
+        
+
+
+        function nextPane(a) {
+            var elm = document.getElementsByClassName("on")[0].id;
+            n = parseInt(elm.charAt(elm.length - 1));
+            var start = document.getElementsByClassName("on")[0];
+            start.classList.add("off");
+            start.classList.remove("on");
+
+            if (n > 0) {
+                n = n + a;
+            } else if (n > 1) {
+                n = 0;
+            } else {
+                n = 1;
+            }
+
+            curPane = document.getElementById("options_" + n);
+            curPane.classList.add("on");
+            curPane.classList.remove("off");
+        }
+    </script>
     <script src = "/scripts/upload-script.js"></script>
 
     
