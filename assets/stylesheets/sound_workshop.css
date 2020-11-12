@@ -1,13 +1,18 @@
+body {
+    background-color: #0e0d59;
+}
+
 html {
     font-family: sans-serif;
+    color: #0e0d59;
 }
 
 .options_pane {
     width: auto;
-    margin-left: 6px;
-    margin-right: 6px;
-    margin-bottom: 6px;
+    margin: 0px;
+    background-color: #f9e2b6;
 
+    border-bottom: 4px solid #0e0d59;
 }
 
 .off {
@@ -21,53 +26,155 @@ html {
 
 .option_switch {
     width: auto;
-    margin: 6px;
+    margin: 0px;
+    padding: 0px;
+    height: 48px;
+    border-top: 4px solid #0e0d59;
+    border-bottom: 4px solid #0e0d59;
 }
 
 .option_container {
     width: auto;
+    background-color: #f9e2b6;
 }
 
 .op_switch {
     width: 12%;
-    height: 40px;
+    height: 48px;
     margin: 0px;
+
+    display: inline-block;
+    background-color: #f9e2b6;
 }
 
 p{
 
-    background-color: pink;
+    background-color: #f9e2b6;
 
 }
 
+#text_container {
+    background-color: #f9e2b6;
+    width: auto;
+    margin-left: 6%;
+    margin-right: 6%;
+    padding: 1px;
+}
+
+#visualiser {
+    width: 100%;
+    height: 400px;
+    margin: 6px;
+    padding: 0px;
+    
+}
+
+#sound_workshop {
+    background-color: #f9e2b6;
+    padding: 0px;
+    width: 88%;
+    margin-left: 6%;
+    margin-right: 6%;
+}
+
+#upload_container {
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+}
+
 #drop_zone {
-    border: 5px solid black;
+    border: 4px solid #0e0d59;
     width: 300px;
     height: 100px;
+    background-color: #f9e2b6;
+    margin: auto;
 }
 
 #display_filename {
     text-decoration: underline;
 }
 
-/* #visual_output {
-    display: none;
-
-} */
-.slider {
-    width: 60%;
-    margin: 5%;
+#visual_output {
+    width: 100%;
+    margin: 0px;
+    object-fit: contain;
 }
 
-.rang_num {
+#wave-spectrogram {
+    width: 100%;
+    margin: 0px;
+    object-fit: contain;
+}
+
+.slider_slot{
+    width: 100%;
+    margin: 0px;
+    display: inline-block;
+}
+
+.range_num {
+    display: block;
     width: 20%;
-    margin-right: 5%;
+    height: 25px;
+    margin-right: 3%;
     margin-top: 5%;
     margin-bottom: 5%;
     float: right;
+    border: 4px solid #0e0d59;
+    opacity: 0.7;
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
 }
 
-h3 {
-    margin-left: auto;
-    margin-right: auto;
+.range_num:hover {
+    opacity: 1; /* Fully shown on mouse-over */
 }
+
+h2 {
+    text-align: center; 
+    width: auto;
+}
+h1 {
+    text-align: center; 
+    width: auto;
+}
+
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 60%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    border: 4px solid #0e0d59;
+    margin-left: 3%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+  
+  /* Mouse-over effects */
+  .slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+  
+  /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #0e0d59; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background:#0e0d59; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+

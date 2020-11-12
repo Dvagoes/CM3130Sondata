@@ -22,8 +22,70 @@
     </div>
 
     <div id="text_container">
-        <h2>Sound Workshop</h2>
-        <p>How to use the application</p>
+        <h1>Sound Workshop</h1>
+        <!--<p>How to use the application</p>-->
+    </div>
+
+
+    <div id="sound_workshop">
+        <div id="visualiser">
+            <div id="player">
+
+            </div>
+            <div id="visual_output">
+                
+            </div>
+
+            <div id = "wave-spectrogram">
+
+
+            </div>
+
+        </div>
+        <div class="option_container">
+
+            <div class="option_switch">
+                <input id="op_left" class="op_switch" value="Left" type="button" style="border-right: 4px solid #0e0d59;">
+                <input id="op_right" class="op_switch" value="Right" type="button" style="float: right; border-left: 4px solid #0e0d59;">
+            </div>
+
+            <!-- have divs that get removed and replace eachother -->
+
+            <div id="options_0" class="options_pane on">
+                <h2>TRANSFORMATIONS</h3>
+                <div class="slider_slot">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
+                        type="number" min="-100" max="100" value="0">
+                </div>
+                <div class="slider_slot">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
+                        type="number" min="-100" max="100" value="0">
+                </div>
+            </div>
+            <div id="options_1" class="options_pane off">
+                <h2>Option pane 1</h3>
+                <div class="slider_slot">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
+                        type="number" min="-100" max="100" value="0">
+                </div>
+                <div class="slider_slot">
+                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
+                        type="number" min="-100" max="100" value="0">
+                </div>
+            </div>
+            <!-- <div id="options_2" class="options_pane off">
+
+            </div>
+            <div id="options_3" class="options_pane off">
+                
+            </div>
+            <div id="options_4" class="options_pane off">
+                
+            </div>
+            <div id="options_5" class="options_pane off">
+                
+            </div> -->
+        </div>
     </div>
 
     <div id="upload_container">
@@ -59,68 +121,6 @@
         <br>
         <div id="display_filename">
             
-        </div>
-    </div>
-
-
-    <div id="sound_workshop" style="width: 88%; margin-left: 6%;">
-        <div id="visualiser" style="width: auto; margin: 6px;">
-            <div id="player">
-
-            </div>
-            <div id="visual_output">
-                
-            </div>
-
-            <div id = "wave-spectrogram">
-
-
-            </div>
-
-        </div>
-        <div class="option_container">
-
-            <div class="option_switch">
-                <input id="op_left" class="op_switch" type="button">
-                <input id="op_right" class="op_switch" type="button" style="float: right;">
-            </div>
-
-            <!-- have divs that get removed and replace eachother -->
-
-            <div id="options_0" class="options_pane on">
-                <h3>Option pane 0</h3>
-                <div class="slider_slot">
-                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
-                        type="number" min="-100" max="100" value="0">
-                </div>
-                <div class="slider_slot">
-                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
-                        type="number" min="-100" max="100" value="0">
-                </div>
-            </div>
-            <div id="options_1" class="options_pane off">
-                <h3>Option pane 1</h3>
-                <div class="slider_slot">
-                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
-                        type="number" min="-100" max="100" value="0">
-                </div>
-                <div class="slider_slot">
-                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
-                        type="number" min="-100" max="100" value="0">
-                </div>
-            </div>
-            <!-- <div id="options_2" class="options_pane off">
-
-            </div>
-            <div id="options_3" class="options_pane off">
-                
-            </div>
-            <div id="options_4" class="options_pane off">
-                
-            </div>
-            <div id="options_5" class="options_pane off">
-                
-            </div> -->
         </div>
     </div>
 
