@@ -2,14 +2,6 @@
 
 //to get file drag and drop working. you need to drag the file over "Choose an Audio File" on the webpage
 
-/**
- * intermittent commenting are from temporary solutions that may come useful later
- * (most likeley not though)
- * 
- * TODO: get file upload functioning by getting 'datastreams' into the body field of the uploaded file json
- *      -currently haven't figured out yet
- */
-
 //var express = require('express');
 //var multer = require('multer');
 //var path = require('path');
@@ -17,7 +9,7 @@ var router = express.Router();
 //var app = express();
 var ejs = require('ejs');
 //const { json } = require('express');
-var upload = multer({storage: 'assets/Audio'})
+//var upload = multer({storage: 'assets/Audio'})
 
 //following code is taken from https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
 
@@ -31,6 +23,30 @@ function dropHandler(ev) {
         for (var i = 0; i < ev.dataTransfer.items.length; i++) {
             if (ev.dataTransfer.items[i].kind === 'file') {
                 file = ev.dataTransfer.items[i].getAsFile();
+
+                //begin file type check
+                let fName = file.name;
+                fileExtension = fName.split('.').pop();
+                console.log("test: " + fileExtension);
+
+                switch(fileExtension) {
+                    case 'mp3':
+                        break;
+                    case 'wav':
+                        break;
+                    case 'aac':
+                        break;
+                    case 'flac':
+                        break;
+                    case 'ogg':
+                        break;
+                    case 'webm':
+                        break;
+                    default:
+                        alert("Invalid file type detected. \n please upload an audio file");
+                        return;
+                }
+
                 // console.log('...file [' + i + '].name = ' + file.name);
                 fileProcess(file);
             }
@@ -50,8 +66,8 @@ function dragOverHandler(ev) {
     ev.preventDefault();
 }
 
-
 function formOnSubmit(ev) {
+
     ev.preventDefault();
     console.log(ev);
     // let el = document.getElementById("audio_upload");
@@ -90,7 +106,7 @@ function fileProcess(file) {
         body: base64,
         redirect: 'follow'
         };
-
+        console.log("test2")
         fetch("/", requestOptions)
         .then(response => response.text())
         .then(response => createSpectrogram(file))
@@ -117,11 +133,13 @@ function createSpectrogram(file) {
                 })
             ]
         });
+        console.log("test3")
+        wavesurfer.load('./assets/Audio/sound.mp3');
         wavesurfer.spectrogram
         alreadyRunning = true;
     //wavesurfer.load('../assets/Audio/birds.mp3');
-
-    wavesurfer.loadBlob(file);
+    
+    
 
     
     //**document.getElementById('visual_output').style.visibility = "hidden";
