@@ -134,7 +134,7 @@ function createSpectrogram(file) {
             ]
         });
         console.log("test3")
-        wavesurfer.load('./assets/Audio/sound.mp3');
+        wavesurfer.load('Audio/sound.mp3');
         wavesurfer.spectrogram
         alreadyRunning = true;
     //wavesurfer.load('../assets/Audio/birds.mp3');
