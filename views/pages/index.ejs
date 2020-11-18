@@ -101,7 +101,20 @@
             <div id="options_5" class="options_pane">
                 
             </div>
+
+            <div id="download-buttons">
+
+                <form id="download-waveform-form" onsubmit="downloadWaveform(event)">
+                    <button type="submit">Download Waveform</button>
+                </form>
+                <form id="download-spectrogram-form" onsubmit="downloadSpectrogram(event)">
+                    <button type="submit">Download Spectrogram</button>
+                </form>
+
+            </div>
+
         </div>
+
     </div>
     
     <script src = "/scripts/script.js"></script>

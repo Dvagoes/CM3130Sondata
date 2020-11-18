@@ -46,6 +46,8 @@ app.use(function (req, res){
 app.post('/', textParser, function(req,res){
     //console.log(req.body),
     //fs.writeFileSync("./assets/Audio/sound.mp3", req.body)
+
+    
     fs.writeFileSync('./assets/Audio/sound.mp3', Buffer.from(req.body.replace('data:audio/mpeg; codecs=opus;base64,', ''), 'base64'));
 
     res.send("<3")

@@ -82,6 +82,7 @@ function formOnSubmit(ev) {
  * this will be used as a staging point for getting files uploaded temporarily.
  * currently it only gets the file details printed to console in json format.
  */
+
 function fileProcess(file) {
     var reader = new FileReader();
 
@@ -135,17 +136,42 @@ function createSpectrogram(file) {
         });
         console.log("test3")
         wavesurfer.load('Audio/sound.mp3');
-        wavesurfer.spectrogram
+
+        //wavesurfer.exportImage() creates an image URI from the waveform
+        var imageDownload = wavesurfer.exportImage();
+
+        function getWaveformImageURI() {
+            let imgURI = imageDownload
+            return imgURI;
+        }
+
+        wavesurfer.spectrogram;
         alreadyRunning = true;
+
     //wavesurfer.load('../assets/Audio/birds.mp3');
-    
-    
-
-    
-    //**document.getElementById('visual_output').style.visibility = "hidden";
-
+    //document.getElementById('visual_output').style.visibility = "hidden";
     //document.getElementById('wave').style.display = "none";
 }
+
+function downloadWaveform(ev) {
+    
+    ev.preventDefault();
+    console.log("test dl waveform");
+
+    var imageURI = getWaveformImageURI();
+
+    console.log(imageURI);
+
+    imageURI.download = 'waveform.png';
+
+}
+
+function downloadSpectrogram(ev) {
+    ev.preventDefault();
+    console.log("test dl spectrogram");
+}
+
+
 
 /**
 function postmanTest(file){
