@@ -128,6 +128,25 @@ function createSpectrogram(file) {
 
     //document.getElementById('wave').style.display = "none";
 }
+ document.getElementById("lowPassSlider").addEventListener("mouseup", lowPass);
+ document.getElementById("highPassSlider").addEventListener("mouseup", highpass);
+
+function lowPass(){
+    var lowVal = document.getElementById("lowPassSlider").value;
+    var lowpass = wavesurfer.backend.ac.createBiquadFilter();
+    var lowFilter = audioCtx.createBiquadFilter();
+    lowFilter.frequency.value = lowVal;
+    wavesurfer.backend.setFilter(lowpass);
+   
+
+}
+function highPass(){
+
+
+
+
+    
+}
 
 /**
 function postmanTest(file){
