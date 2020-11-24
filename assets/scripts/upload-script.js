@@ -22,6 +22,11 @@ var theFile = null;
 //following code is taken from https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
 
 var wavesurfer = null;
+var spectro = null;
+
+
+var waveBarWidth;
+var waveHeight;
 
 function dropHandler(ev) {
     console.log('File(s) dropped');
@@ -97,7 +102,6 @@ function fileProcess(file) {
         redirect: 'follow'
         };
 
-        theFile = file;
         fetch("/", requestOptions)
         .then(response => response.text())
         .then(response => createSpectrogram(file))
@@ -107,10 +111,19 @@ function fileProcess(file) {
 }
 
 function createSpectrogram(file) {
-    
+
+    if(file != null){
+
+        theFile = file;
+
+        waveBarWidth = 0;
+        waveHeight = 128;
+
+    }
+   // fs.writeFile('hot-colormap.json', );   
+
     //var alreadyRunning = false;
-  //  var cm = [{"index":0,"rgb":[42,24,108]},{"index":0.13,"rgb":[33,50,162]},{"index":0.25,"rgb":[15,90,145]},{"index":0.38,"rgb":[40,118,137]},{"index":0.5,"rgb":[59,146,135]},{"index":0.63,"rgb":[79,175,126]},{"index":0.75,"rgb":[120,203,104]},{"index":0.88,"rgb":[193,221,100]},{"index":1,"rgb":[253,239,154]}];
-   
+    
     document.getElementById('visual_output').innerHTML = ""; 
     document.getElementById('wave-spectrogram').innerHTML = ""; 
 
@@ -119,49 +132,76 @@ function createSpectrogram(file) {
             container: '#visual_output',
             waveColor: 'red',
             progressColor: 'black',
-
+            barWidth: waveBarWidth,
+            height: waveHeight,
+            normalize:true,
             plugins: [
-                window.WaveSurfer.spectrogram.create({
+                spectro = window.WaveSurfer.spectrogram.create({
                     wavesurfer: wavesurfer,
                     container: "#wave-spectrogram",
-                    colorMap: cm
                 })
             ]
         });
-        wavesurfer.spectrogram
-        alreadyRunning = true;
     //wavesurfer.load('../assets/Audio/birds.mp3');
 
-    wavesurfer.loadBlob(file);
+    wavesurfer.loadBlob(theFile);
 
-    
     //document.getElementById('visual_output').style.visibility = "hidden";
 
     //document.getElementById('wave').style.display = "none";
 }
 
-function changeColour(color){
+//This method, guess what, changes the colour of the waveform.
+//It requires a hex colour passed into the method when called.
+//This should be passed as a string using ''
+function changeColour(colour){
 
-
-
-    wavesurfer.setWaveColor('green')
-
+    wavesurfer.setWaveColor(colour)
     
-    /*
-    var colors = colormap({
-        colormap: 'hot',
-        nshades: 256,
-        format: 'float'
-    });
-    */
+
 }
 
+//This method triggers playback of the audio
 function startPlaying(){
 
-    wavesurfer.spectrogram.loadlabels();
-    //wavesurfer.playPause();
+    //wavesurfer.spectrogram.loadlabels();
+    wavesurfer.playPause();
 
 }
+
+//This method updates the bar width (makes the waveform look blocky)
+//The values should go up in 0.1 to ensure the waveform doesnt get toooo blocky
+//It should also only be called once a width has been decided.
+//If not the api could have to recreate multiple waveforms
+function updateBarWidth(bm){
+
+    //wavesurfer.spectrogram.loadlabels();
+    waveBarWidth = bm;
+
+    createSpectrogram(null);
+
+}
+
+
+//This zooms in and out the waveform
+//Values should increase by 100ish as it is uses pixels. And there are alot of pixels on a screen
+
+function zoomIn(zoomies){
+
+    wavesurfer.zoom(zoomies)
+
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Load a colormap json file to be passed to the spectrogram.create method.
+    WaveSurfer.util
+        .fetchFile({ url: 'hot-colormap.json', responseType: 'json' })
+        .on('success', colorMap => {
+            console.log("Pog")
+            
+        });
+});
 
 /**
 function postmanTest(file){
