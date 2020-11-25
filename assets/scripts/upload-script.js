@@ -18,6 +18,8 @@ var router = express.Router();
 var ejs = require('ejs');
 //const { json } = require('express');
 var upload = multer({storage: 'assets/Audio'})
+document.getElementById("lowPassSlider").addEventListener("mouseup", lowPass);
+document.getElementById("highPassSlider").addEventListener("mouseup", highPass);
 
 //following code is taken from https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
 
@@ -128,17 +130,16 @@ function createSpectrogram(file) {
 
     //document.getElementById('wave').style.display = "none";
 }
- document.getElementById("lowPassSlider").addEventListener("mouseup", lowPass);
- document.getElementById("highPassSlider").addEventListener("mouseup", highpass);
 
 function lowPass(){
+    console.log("filterChanged")
     var lowVal = document.getElementById("lowPassSlider").value;
     var lowpass = wavesurfer.backend.ac.createBiquadFilter();
-    var lowFilter = audioCtx.createBiquadFilter();
-    lowFilter.frequency.value = lowVal;
+    //var lowFilter = audioCtx.createBiquadFilter();
+    lowpass.frequency.value = lowVal;
+    //lowFilter.frequency.value = lowVal;
     wavesurfer.backend.setFilter(lowpass);
-   
-
+    
 }
 function highPass(){
 
