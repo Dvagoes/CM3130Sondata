@@ -13,6 +13,9 @@
 //var express = require('express');
 //var multer = require('multer');
 //var path = require('path');
+
+
+
 var router = express.Router();
 //var app = express();
 var ejs = require('ejs');
@@ -20,7 +23,6 @@ var ejs = require('ejs');
 var upload = multer({ storage: 'assets/Audio' })
 
 var theFile = null;
-
 
 
 //following code is taken from https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
@@ -142,15 +144,15 @@ function createSpectrogram(file) {
     wavesurfer = WaveSurfer.create({
 
         container: '#visual_output',
-        waveColor: 'red',
-        progressColor: 'black',
+        waveColor: '#e66465',
+        progressColor: 'white',
         barWidth: waveBarWidth,
         height: waveHeight,
         normalize: true,
         plugins: [
             spectro = window.WaveSurfer.spectrogram.create({
                 wavesurfer: wavesurfer,
-                container: "#wave-spectrogram",
+                container: "#wave-spectrogram"
             })
         ]
     });
@@ -193,6 +195,11 @@ function startPlaying() {
 function updateBarWidth() {
     var bm = document.getElementById("barWidth").value;
 
+    if(bm == 0){
+
+        bm = null;
+
+    }
     //wavesurfer.spectrogram.loadlabels();
     waveBarWidth = bm;
 
@@ -215,6 +222,7 @@ function rewind() {
 
     wavesurfer.stop();
 }
+/*
 document.addEventListener('DOMContentLoaded', function () {
     // Load a colormap json file to be passed to the spectrogram.create method.
     WaveSurfer.util
@@ -224,6 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         });
 });
+*/
 //Attempt at getting a low pass filter to work, worked audibly 
 //on the playback however to get it to correct visually it would
 //need to edit the sound file directly every time it was changed, 
