@@ -7,6 +7,8 @@ var upload = require("express-fileupload");
 const colormap = require('colormap');
 var multer = require('multer');
 var bodyParser = require('body-parser');
+var html2canvas = require('html2canvas');
+var FileSaver = require('file-saver');
 
 module.exports.colormap = colormap;
 
@@ -46,6 +48,8 @@ app.use(function (req, res){
 app.post('/', textParser, function(req,res){
     //console.log(req.body),
     //fs.writeFileSync("./assets/Audio/sound.mp3", req.body)
+
+    
     fs.writeFileSync('./assets/Audio/sound.mp3', Buffer.from(req.body.replace('data:audio/mpeg; codecs=opus;base64,', ''), 'base64'));
 
     res.send("<3")

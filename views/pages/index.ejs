@@ -7,8 +7,13 @@
     <!-- <link src = "stylesheets/sound_workshop.css"></style> -->
     <!--This is a link to the basic wavesurfer-->
     <script src="https://unpkg.com/wavesurfer.js"></script>
+
     <!--This is a link to the spectrogram plugin for wavesurfer-->
     <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.spectrogram.js"></script>
+
+    <!--Links for making the image download function-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
    
     <!--<script type="module" src="../assets/scripts/script.js"></script>
     <script data-main="../assets/scripts/actualScripts/main" src="../assets/scripts/require.js"></script>-->
@@ -27,9 +32,32 @@
         <!--<p>How to use the application</p>-->
     </div>
 
+    <div id="upload_container">
+        <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event)">
+             
+            <label for="audio_upload">
+                Choose an Audio File:
+            </label>
+            
+            <div id="manual_file_select">
+                
+                <form id="manual_file_select_form" method="POST">
 
-    <div id="sound_workshop">
-        <div id="visualiser">
+                    <input type="file" id="audio_upload" name="audio_upload" accept="audio/mp3" onchange="formOnSubmit(event)">
+
+                </form>
+
+            </div>
+        </div>
+        <br>
+        <div id="display_filename">
+            
+        </div>
+    </div>
+
+
+    <div id="sound_workshop" style="width: 88%; margin-left: 6%;">
+        <div id="visualiser" style="width: auto; margin: 6px;">
             <div id="player">
 
             </div>
@@ -43,47 +71,27 @@
             </div>
 
         </div>
-        <div class="option_container">
-
-            <div class="option_switch">
-                <input id="op_left" class="op_switch" value="Left" type="button" style="border-right: 4px solid #0e0d59;">
-                <input id="op_right" class="op_switch" value="Right" type="button" style="float: right; border-left: 4px solid #0e0d59;">
+        <div id="option_container">
+            <div id="option_switch">
+                <input id="op_left" class="op_switch" type="button">
+                <input id="op-right" class="op_switch" type="button" style = "float: right;">
             </div>
-
-            <!-- have divs that get removed and replace eachother -->
-
-            <div id="options_0" class="options_pane on">
-                <h2>TRANSFORMATIONS</h3>
-                <div class="slider_slot">
-                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
-                        type="number" min="-100" max="100" value="0">
-                </div>
-                <div class="slider_slot">
-                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
-                        type="number" min="-100" max="100" value="0">
-                </div>
-            </div>
-            <div id="options_1" class="options_pane off">
-                <h2>Option pane 1</h3>
-                <div class="slider_slot">
-                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
-                        type="number" min="-100" max="100" value="0">
-                </div>
-                <div class="slider_slot">
-                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
-                        type="number" min="-100" max="100" value="0">
-                </div>
-            </div>
-            <!-- <div id="options_2" class="options_pane off">
+            <div id="options_0" class="options_pane"> <!-- have divs that get removed and replace eachother -->
 
             </div>
-            <div id="options_3" class="options_pane off">
+            <div id="options_1" class="options_pane">
+
+            </div>
+            <div id="options_2" class="options_pane">
+
+            </div>
+            <div id="options_3" class="options_pane">
                 
             </div>
-            <div id="options_4" class="options_pane off">
+            <div id="options_4" class="options_pane">
                 
             </div>
-            <div id="options_5" class="options_pane off">
+            <div id="options_5" class="options_pane">
                 
             </div> -->
         </div>
@@ -111,80 +119,30 @@
 
                     <input type="file" id="audio_upload" name="audio_upload" accept="audio/*" onchange="formOnSubmit(event)">
 
-                    <!-- submit button removed due to redundancy -->
-                    <!-- <button type="submit" value="Submit">Submit</button> -->
+            <div id="download-buttons">
 
-                    <!-- clear button currently has no functionality -->
-                    <!-- <button type="submit" value="Clear">Clear</button> -->
+                <!--
+                download buttons for downloading the waveform and spectrogram
+                after generation.
+                -->
 
+                <form id="download-waveform-form" onsubmit="downloadWaveform(event)">
+                    <button type="submit">Download Waveform</button>
+                </form>
+                <form id="download-spectrogram-form" onsubmit="downloadSpectrogram(event)">
+                    <button type="submit">Download Spectrogram</button>
                 </form>
 
             </div>
+
         </div>
-        <br>
-        <div id="display_filename">
-            
-        </div>
+
     </div>
+    
+    <script src = "/scripts/script.js"></script>
 
-    <script>
-        //document.getElementById("op_left").addEventListener("click", nextPane(-1));
-        //document.getElementById("op_right").addEventListener("click", nextPane(1));
-
-        var n = 0;
-        var curPane = document.getElementsByClassName("on")[0];
-
-        sliders = document.getElementsByClassName("slider");
-        boxes = document.getElementsByClassName("range_num");
-
-        sliders[0].oninput = function () {
-            boxes[0].value = this.value;
-        }
-        boxes[0].oninput = function () {
-            sliders[0].value = this.value;
-        }
-        sliders[1].oninput = function () {
-            boxes[1].value = this.value;
-        }
-        boxes[1].oninput = function () {
-            sliders[1].value = this.value;
-        }
-        sliders[2].oninput = function () {
-            boxes[2].value = this.value;
-        }
-        boxes[2].oninput = function () {
-            sliders[2].value = this.value;
-        }
-        sliders[3].oninput = function () {
-            boxes[3].value = this.value;
-        }
-        boxes[3].oninput = function () {
-            sliders[3].value = this.value;
-        }
-        
-
-
-        function nextPane(a) {
-            var elm = document.getElementsByClassName("on")[0].id;
-            n = parseInt(elm.charAt(elm.length - 1));
-            var start = document.getElementsByClassName("on")[0];
-            start.classList.add("off");
-            start.classList.remove("on");
-
-            if (n > 0) {
-                n = n + a;
-            } else if (n > 1) {
-                n = 0;
-            } else {
-                n = 1;
-            }
-
-            curPane = document.getElementById("options_" + n);
-            curPane.classList.add("on");
-            curPane.classList.remove("off");
-        }
-    </script>
-    <script src = "/scripts/upload-script.js"></script>
+    <!--upload-script.js contains code for uploading files.-->
+    <!-- <script src = "/scripts/upload-script.js"></script> -->
 
     
 
