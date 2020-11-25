@@ -21,8 +21,7 @@ var upload = multer({storage: 'assets/Audio'})
 
 var theFile = null;
 
-document.getElementById("lowPassSlider").addEventListener("mouseup", lowPass);
-document.getElementById("highPassSlider").addEventListener("mouseup", highPass);
+
 
 //following code is taken from https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
 
@@ -32,6 +31,13 @@ var spectro = null;
 
 var waveBarWidth;
 var waveHeight;
+
+//old event listeners
+//document.getElementById("lowPassSlider").addEventListener("click", lowPass);
+//document.getElementById("lowPassSlider").addEventListener("mouseup", lowPass);
+//document.getElementById("highPassSlider").addEventListener("mouseup", highPass);
+
+
 
 function dropHandler(ev) {
     console.log('File(s) dropped');
@@ -160,8 +166,8 @@ function createSpectrogram(file) {
 //This method, guess what, changes the colour of the waveform.
 //It requires a hex colour passed into the method when called.
 //This should be passed as a string using ''
-function changeColour(colour){
-
+function changeColour(){
+var colour = document.getElementById('colourPicker').value;
     wavesurfer.setWaveColor(colour)
     
 
@@ -198,7 +204,10 @@ function zoomIn(zoomies){
 
 }
 
+function rewind(){
 
+    wavesurfer.stop();
+}
 document.addEventListener('DOMContentLoaded', function() {
     // Load a colormap json file to be passed to the spectrogram.create method.
     WaveSurfer.util
@@ -210,15 +219,18 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function lowPass(){
+function filters(){
     console.log("filterChanged")
     var lowVal = document.getElementById("lowPassSlider").value;
-    var lowpass = wavesurfer.backend.ac.createBiquadFilter();
-    //var lowFilter = audioCtx.createBiquadFilter();
-    lowpass.frequency.value = lowVal;
+    //var lowpass = wavesurfer.backend.ac.createBiquadFilter();
+   // var lowFilter = audioCtx.createBiquadFilter();
+    //lowpass.frequency.value = lowVal;
     //lowFilter.frequency.value = lowVal;
-    wavesurfer.backend.setFilter(lowpass);
-    
+    //wavesurfer.backend.setFilter(lowpass);
+    var lowpass = wavesurfer.backend.ac.createBiquadFilter();
+lowpass.frequency.value = lowVal;
+wavesurfer.backend.setFilter(lowpass);
+console.log(wavesurfer.getFilters());
 }
 function highPass(){
 

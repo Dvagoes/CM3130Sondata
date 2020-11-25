@@ -53,19 +53,25 @@
 
             <div id="options_0" class="options_pane on">
                 <h2>TRANSFORMATIONS</h3>
-                <div class="slider_slot">
-
-                    <input class="slider" type="range" min="-100" max="100" value="0"><input class="range_num"
-                        type="number" min="-100" max="100" value="0">
-                    <input class="slider"  id = "lowPassSlider"  type="range" min="0" max="20000" value="0"><input class="range_num"
-                        type="number" min="-100" max="10000" value="0">
+                <div class="slider_slot">                
+                    <input class="slider"  id="lowPassSlider" type="range" min="0" max="20000" value="0"><input class="range_num"
+                        type="number" min="0" max="20000" value="0">
                 </div>
                 <div class="slider_slot">
                     <input class="slider" id = "highPassSlider" type="range" min="0" max="20000" value="20000"><input class="range_num"
-                        type="number" min="-100" max="20000" value="20000">
+                        type="number" min="0" max="20000" value="20000">
                 </div>
-                <button onclick="changeColour()" id = "colorChange" >Set Red Colour</button>
+
+
+                <div class="slider_slot">
+                    <div>
+                        <input id="colourPicker" type="color" id="head" name="head" value="#e66465">
+
+                </div>
+                <button onclick="filters()" id="updateButton">Update filter changes</button>
+                <button onclick="changeColour()" id = "colorChange" >Set waveform Colour</button>
                 <button onclick="startPlaying()" id = "PlayPause" >Play Pause</button>
+                <button onclick="rewind()" id="rewind">rewind</button>
             </div>
             <div id="options_1" class="options_pane off">
                 <h2>Option pane 1</h3>
