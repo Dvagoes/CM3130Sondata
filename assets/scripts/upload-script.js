@@ -37,6 +37,7 @@ var waveHeight;
 //document.getElementById("lowPassSlider").addEventListener("mouseup", lowPass);
 //document.getElementById("highPassSlider").addEventListener("mouseup", highPass);
 
+//var lowpass = null;
 
 
 function dropHandler(ev) {
@@ -153,6 +154,12 @@ function createSpectrogram(file) {
                 })
             ]
         });
+       /* if(file != null){
+         
+       lowpass = wavesurfer.backend.ac.createBiquadFilter();
+lowpass.frequency.value = 0;
+        }*/
+  
     //wavesurfer.load('../assets/Audio/birds.mp3');
 
     wavesurfer.loadBlob(theFile);
@@ -161,8 +168,6 @@ function createSpectrogram(file) {
 
     //document.getElementById('wave').style.display = "none";
 }
-
-
 //This method, guess what, changes the colour of the waveform.
 //It requires a hex colour passed into the method when called.
 //This should be passed as a string using ''
@@ -194,14 +199,13 @@ function updateBarWidth(bm){
 
 }
 
-
 //This zooms in and out the waveform
 //Values should increase by 100ish as it is uses pixels. And there are alot of pixels on a screen
 
-function zoomIn(zoomies){
-
-    wavesurfer.zoom(zoomies)
-
+function zoomIn(){
+var zoomies = document.getElementById("zoomSlider").value;
+console.log(zoomies);
+    wavesurfer.zoom(zoomies)  
 }
 
 function rewind(){
@@ -217,29 +221,20 @@ document.addEventListener('DOMContentLoaded', function() {
             
         });
 });
-
+//Attempt at getting a low pass filter to work, worked audibly 
+//on the playback however to get it to correct visually it would
+//need to edit the sound file directly every time it was changed, 
+//which was deemed to be outside the scope of this project
 
 function filters(){
     console.log("filterChanged")
     var lowVal = document.getElementById("lowPassSlider").value;
-    //var lowpass = wavesurfer.backend.ac.createBiquadFilter();
-   // var lowFilter = audioCtx.createBiquadFilter();
-    //lowpass.frequency.value = lowVal;
-    //lowFilter.frequency.value = lowVal;
-    //wavesurfer.backend.setFilter(lowpass);
-    var lowpass = wavesurfer.backend.ac.createBiquadFilter();
-lowpass.frequency.value = lowVal;
-wavesurfer.backend.setFilter(lowpass);
+    var lowpass = wavesurfer.backend.ac.createBiquadFilter();   
+    lowpass.frequency.value = lowVal;
+    wavesurfer.backend.setFilter(lowpass);
 console.log(wavesurfer.getFilters());
+wavesurfer.loadBlob(theFile);
 }
-function highPass(){
-
-
-
-
-    
-}
-
 
 /**
 function postmanTest(file){
