@@ -173,9 +173,9 @@ lowpass.frequency.value = 0;
 //This should be passed as a string using ''
 function changeColour(){
 var colour = document.getElementById('colourPicker').value;
-    wavesurfer.setWaveColor(colour)
+    wavesurfer.setWaveColor(colour);
     
-
+console.log("colour change applied");
 }
 
 //This method triggers playback of the audio
@@ -190,12 +190,14 @@ function startPlaying(){
 //The values should go up in 0.1 to ensure the waveform doesnt get toooo blocky
 //It should also only be called once a width has been decided.
 //If not the api could have to recreate multiple waveforms
-function updateBarWidth(bm){
+function updateBarWidth(){
+    var bm = document.getElementById("barWidth").value;
 
     //wavesurfer.spectrogram.loadlabels();
     waveBarWidth = bm;
 
     createSpectrogram(null);
+    console.log("bar width changed");
 
 }
 
@@ -206,8 +208,9 @@ function zoomIn(){
 var zoomies = document.getElementById("zoomSlider").value;
 console.log(zoomies);
     wavesurfer.zoom(zoomies)  
+    console.log("zoom applied");
 }
-
+//stops current playback and rewinds to the beginning
 function rewind(){
 
     wavesurfer.stop();
@@ -232,8 +235,20 @@ function filters(){
     var lowpass = wavesurfer.backend.ac.createBiquadFilter();   
     lowpass.frequency.value = lowVal;
     wavesurfer.backend.setFilter(lowpass);
-console.log(wavesurfer.getFilters());
+//console.log(wavesurfer.getFilters());
 wavesurfer.loadBlob(theFile);
+}
+//main update script which calls the other functions, bar width needs to 
+//be called first as it recalls the spectrogram create function, placing 
+//this anywhere but the top would cause any functions called before it to be overwritten
+function update(){
+    updateBarWidth();
+    filters();
+changeColour();
+zoomIn();
+
+
+console.log("updates applied")
 }
 
 /**
