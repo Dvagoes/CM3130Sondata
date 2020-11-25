@@ -7,6 +7,8 @@ var upload = require("express-fileupload");
 const colormap = require('colormap');
 var multer = require('multer');
 var bodyParser = require('body-parser');
+var html2canvas = require('html2canvas');
+var FileSaver = require('file-saver');
 
 module.exports.colormap = colormap;
 

@@ -2,14 +2,12 @@
 
 //to get file drag and drop working. you need to drag the file over "Choose an Audio File" on the webpage
 
-//var express = require('express');
-//var multer = require('multer');
-//var path = require('path');
 var router = express.Router();
-//var app = express();
+
 var ejs = require('ejs');
-//const { json } = require('express');
-//var upload = multer({storage: 'assets/Audio'})
+
+var html2canvas = require('html2canvas');
+var FileSaver = require('file-saver');
 
 //following code is taken from https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
 
@@ -137,38 +135,41 @@ function createSpectrogram(file) {
         console.log("test3")
         wavesurfer.load('Audio/sound.mp3');
 
-        //wavesurfer.exportImage() creates an image URI from the waveform
-        var imageDownload = wavesurfer.exportImage();
-
-        function getWaveformImageURI() {
-            let imgURI = imageDownload
-            return imgURI;
-        }
-
         wavesurfer.spectrogram;
         alreadyRunning = true;
 
-    //wavesurfer.load('../assets/Audio/birds.mp3');
-    //document.getElementById('visual_output').style.visibility = "hidden";
-    //document.getElementById('wave').style.display = "none";
 }
 
 function downloadWaveform(ev) {
-    
     ev.preventDefault();
-    console.log("test dl waveform");
 
-    var imageURI = getWaveformImageURI();
+    console.log("download waveform function called");
 
-    console.log(imageURI);
-
-    imageURI.download = 'waveform.png';
-
+    var visual_output = document.getElementById('visual_output');
+        
+    html2canvas(visual_output, {
+        onrendered: function(canvas) {
+            canvas.toBlob(function(blob) {
+                saveAs(blob, 'waveform.png');
+            });
+        }
+    });
 }
 
 function downloadSpectrogram(ev) {
     ev.preventDefault();
-    console.log("test dl spectrogram");
+
+    console.log("download spectrogram function called");
+
+    var wave_spectrogram = document.getElementById('wave-spectrogram');
+
+    html2canvas(wave_spectrogram, {
+        onrendered: function(canvas) {
+            canvas.toBlob(function(blob) {
+                saveAs(blob, 'spectrogram.png');
+            });
+        }
+    });
 }
 
 
