@@ -120,7 +120,6 @@ p{
     margin-right: 3%;
     margin-top: 5%;
     margin-bottom: 5%;
-    float: right;
     border: 4px solid #0e0d59;
     opacity: 0.7;
     -webkit-transition: .2s; /* 0.2 seconds transition on hover */
@@ -178,3 +177,59 @@ h1 {
     cursor: pointer; /* Cursor on hover */
   }
 
+
+  /* ------------------------------------------------- */
+
+  @font-face{
+      font-family: myFont;
+      src: url(External/DIN\ 30640\ Std\ Neuzeit\ Grotesk\ Bold\ Cond.otf);
+  } /*The font they want isn't on the font list so i had to import a similar one*/
+
+
+  /*Change the headers to their proper design*/
+  h1 {
+      font-family:  myFont;
+      color: #ff005A;
+      font-size: 64px;
+  }
+
+  h2 {
+    font-family:  helvetica;
+    color: #ff005A;
+}
+
+/*positioning and resizing the logo to fit better. It isn't perfect but i don't want to interfere with the background too much so do what you will with it*/
+#image {
+    position: absolute;
+    width: 200px;
+    margin-top: 0.5%;
+    margin-left: 5%;
+    vertical-align: middle;
+}
+
+/*Graphs were bothering me as they were off center so i changed it*/
+#visualiser {
+    margin: 0;
+}
+
+/*changed the size and position so i could decrease the amount of unnecesarry space it is taking so we can add more things and changed font size to make it more visually appealing*/
+.range_num {
+    display: block;
+    font-size: 1.5em;
+    width: 4%;
+    height: 25px;
+    margin-right: 30%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    float: right;
+    border: 4px solid #0e0d59;
+    opacity: 0.7;
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+/*Supposed to set the colour wheel image on the right if the sliders and boxes but couldn't see the image to find the results*/
+.Wheel {
+    float: right;
+    opacity: 1;
+}
