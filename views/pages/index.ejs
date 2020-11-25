@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html>
-    
+
 <head>
     <link rel="stylesheet" href="stylesheets/sound_workshop.css">
     <!-- <link src = "stylesheets/sound_workshop.css"></style> -->
@@ -14,7 +14,7 @@
     <!--Links for making the image download function-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-   
+
     <!--<script type="module" src="../assets/scripts/script.js"></script>
     <script data-main="../assets/scripts/actualScripts/main" src="../assets/scripts/require.js"></script>-->
 
@@ -23,12 +23,17 @@
 <body style="background-color: #0D0D59">
 
     <div id="navbar">
-    
+
     </div>
 
     <div id="text_container">
-        <img src="stylesheets/External/LOGO_AT_WHITE.png" id="image" alt=""> <!--Main Logo-->
-        <h1>Sound Workshop</h1>
+        <div>
+            <img src="stylesheets/External/LOGO_AT_WHITE.png" id="image" alt="">
+            <!--Main Logo-->
+        </div>
+        <div>
+            <h1>Sound Workshop</h1>
+        </div>
         <!--<p>How to use the application</p>-->
     </div>
 
@@ -38,10 +43,10 @@
 
             </div>
             <div id="visual_output">
-                
+
             </div>
 
-            <div id = "wave-spectrogram">
+            <div id="wave-spectrogram">
 
 
             </div>
@@ -49,76 +54,84 @@
         </div>
         <div id="option_container">
             <div id="option_switch">
-                <input id="op_left" class="op_switch" type="button">
-                <input id="op-right" class="op_switch" type="button" style = "float: right;">
+                <a id="op_left" class="op_switch" type="button" onclick="nextPane(-1)">
+                    <h3>&#10094;</h3>
+                </a>
+                <a id="op-right" class="op_switch" type="button" onclick="nextPane(1)" style="float: right;">
+                    <h3>&#10095;</h3>
+                </a>
             </div>
-            <div id="options_0" class="options_pane"> <!-- have divs that get removed and replace eachother -->
+            <div class="option_btn">
+                <span class="btn" style="margin-right: 1.55%;" onclick="startPlaying()" id="PlayPause">
+                    <h3>Play</h3>
+                </span>
+                <span class="btn" onclick="rewind()" id="rewind">
+                    <h3>Rewind</h3>
+                </span>
+                <span class="btn" style="margin-left: 1.55%; float: right;" onclick="update()" id="updateButton">
+                    <h3>Update</h3>
+                </span>
+            </div>
 
             <!-- have divs that get removed and replace eachother -->
 
-            <div id="options_0" class="options_pane on">
-                <h2>TRANSFORMATIONS</h3>
+            <div id="options_0" class="options_pane">
+                <h2>TRANSFORMATIONS</h2>
                 <div class="slider_slot">
-                    <p>Low pass filter</p>                
-                    <input class="slider"  id="lowPassSlider" type="range" min="0" max="20000" value="0"><input class="range_num"
-                        type="number" min="0" max="20000" value="0">
+                    <h3>Low Pass Filter</h3>
+                    <input class="slider" id="lowPassSlider" type="range" min="0" max="20000" value="0"><input
+                        class="range_num" type="number" min="0" max="20000" value="0">
                 </div>
-                <div class="slider_slot">
-                    <p>zoom</p>
-                    <input class="slider" id = "zoomSlider" type="range" min="0" max="50" value="25"><input class="range_num"
-                        type="number" min="0" max="50" value="25">
-                </div>
-                <div class="slider_slot">
-                    <p>bar barWidth</p>
-                    <input id="barWidth" type = "number" min="0" max = "1" step="0.1" value="0">
-
-                </div>
-
-
-                <div class="slider_slot">
-                    
-                        <input id="colourPicker" type="color" id="head" name="head" value="#e66465">
-
-                </div>
-               <!--<button onclick="filters()" id="updateButton">Update filter changes</button>
-                <button onclick="changeColour()" id = "colorChange" >Set waveform Colour</button>
-                
-                <button onclick="zoomIn()" id="zoomer">zoom</button>
-                <button onclick="updateBarWidth()" id="barWidthButton">Update Bar Width</button>  --> 
-
-                <button onclick="startPlaying()" id = "PlayPause" >Play Pause</button>
-                <button onclick="rewind()" id="rewind">rewind</button>
-
-                <button onclick="update()" id="updateButton">Update changes</button>
             </div>
             <div id="options_1" class="options_pane">
-
+                <h2>TRANSFORMATIONS</h2>
+                <div class="slider_slot">
+                    <h3>Zoom</h3>
+                    <input class="slider" id="zoomSlider" type="range" min="0" max="50" value="25"><input
+                        class="range_num" type="number" min="0" max="50" value="25">
+                </div>
             </div>
             <div id="options_2" class="options_pane">
+                <h2>TRANSFORMATIONS</h2>
+                <div class="slider_slot">
+                    <h3>Bar Width</h3>
+                    <input class="slider" id="barSlider" type="range" min="0" max="1" step="0.01" value="0"><input
+                        class="range_num" id="barWidth" type="number" min="0" max="1" step="0.01" value="0">
 
+                </div>
             </div>
             <div id="options_3" class="options_pane">
-                
-            </div>
-            <div id="options_4" class="options_pane">
-                
-            </div>
-            <div id="options_5" class="options_pane">
-                
+                <h2>TRANSFORMATIONS</h2>
+                <div class="slider_slot">
+                    <h3>Colour Select</h3>
+                    <input id="colourPicker" style="margin-left: 44%; width: 12%; margin-top: 40px;" type="color"
+                        id="head" name="head" value="#e66465">
+                </div>
             </div>
         </div>
     </div>
 
-    <img src="color-wheel.png" class="Wheel" alt=""> <!--Meant to show an example of a colour wheel but doesn't work-->
-
     <div id="upload_container">
         <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event)">
-             
-            <label for="audio_upload">
-                Choose an Audio File:
+
+            <label class="updn_btn" style="margin-left: 1.25%;" for="audio_upload">
+                <h2>Upload File</h2>
             </label>
-            
-            <div id="manual_file_select">
+
+
+            <!--
+                download buttons for downloading the waveform and spectrogram
+                after generation.
+                -->
+            <span class="updn_btn" onclick="downloadWaveform(event)">
+                <h2>Download Waveform</h2>
+            </span>
+
+            <span class="updn_btn" style="margin-right: 1.25%;" onclick="downloadSpectrogram(event)">
+                <h2>Download Spectrogram</h2>
+            </span>
+
+            <div class="hide" id="manual_file_select">
                 <!-- 
                     form displays file name as part of default HTML form functionality.
                     it only works however when using the manual file selection.
@@ -127,36 +140,80 @@
 
                     TODO: remove form filename display
                  -->
-                <form id="manual_file_select_form" method="POST">
+                <form class="hide" id="manual_file_select_form" method="POST">
 
-                    <input type="file" id="audio_upload" name="audio_upload" accept="audio/mp3" onchange="formOnSubmit(event)">
-
-            <div id="download-buttons">
-
-                <!--
-                download buttons for downloading the waveform and spectrogram
-                after generation.
-                -->
-
-                <form id="download-waveform-form" onsubmit="downloadWaveform(event)">
-                    <button type="submit">Download Waveform</button>
+                    <input class="hide" type="file" id="audio_upload" name="audio_upload" accept="audio/mp3"
+                        onchange="formOnSubmit(event)">
                 </form>
-                <form id="download-spectrogram-form" onsubmit="downloadSpectrogram(event)">
-                    <button type="submit">Download Spectrogram</button>
-                </form>
-
             </div>
+
+
+
+
 
         </div>
 
     </div>
-    
-    <script src = "/scripts/script.js"></script>
+
+    <script src="/scripts/script.js"></script>
+    <script>
+        //document.getElementById("op_left").addEventListener("click", nextPane(-1));
+        //document.getElementById("op_right").addEventListener("click", nextPane(1));
+        var paneIndex = 1;
+
+        showPane(paneIndex);
+
+        sliders = document.getElementsByClassName("slider");
+        boxes = document.getElementsByClassName("range_num");
+        sliders[0].oninput = function () {
+            boxes[0].value = this.value;
+        }
+        boxes[0].oninput = function () {
+            sliders[0].value = this.value;
+        }
+        sliders[1].oninput = function () {
+            boxes[1].value = this.value;
+        }
+        boxes[1].oninput = function () {
+            sliders[1].value = this.value;
+        }
+        sliders[2].oninput = function () {
+            boxes[2].value = this.value;
+        }
+        boxes[2].oninput = function () {
+            sliders[2].value = this.value;
+        }
+        sliders[3].oninput = function () {
+            boxes[3].value = this.value;
+        }
+        boxes[3].oninput = function () {
+            sliders[3].value = this.value;
+        }
+
+        function showPane(n) {
+            var panes = document.getElementsByClassName("options_pane");
+            if (n > panes.length) { paneIndex = 1 }
+            if (n < 1) { paneIndex = panes.length }
+
+            for (var i = 0; i < panes.length; i++) {
+                panes[i].style.display = "none";
+            }
+            panes[paneIndex - 1].style.display = "block";
+        }
+
+        function currentPane(n) {
+            showPane(paneIndex = n);
+        }
+
+        function nextPane(n) {
+            showPane(paneIndex += n);
+        }
+    </script>
 
     <!--upload-script.js contains code for uploading files.-->
-    <!-- <script src = "/scripts/upload-script.js"></script> -->
+    <script src = "/scripts/upload-script.js"></script>
 
-    
+
 
 </body>
 

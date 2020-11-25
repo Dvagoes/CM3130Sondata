@@ -17,7 +17,7 @@ var router = express.Router();
 //var app = express();
 var ejs = require('ejs');
 //const { json } = require('express');
-var upload = multer({storage: 'assets/Audio'})
+var upload = multer({ storage: 'assets/Audio' })
 
 var theFile = null;
 
@@ -100,31 +100,31 @@ function fileProcess(file) {
     var raw = reader.result;
 
     file.arrayBuffer().then(buffer => {
-       // console.log(buffer); 
+        // console.log(buffer); 
 
         var base64 = window.btoa(
             new Uint8Array(buffer)
-              .reduce((data, byte) => data + String.fromCharCode(byte), '')
+                .reduce((data, byte) => data + String.fromCharCode(byte), '')
         );
         //console.log(base64);
         var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: base64,
-        redirect: 'follow'
+            method: 'POST',
+            headers: myHeaders,
+            body: base64,
+            redirect: 'follow'
         };
 
         fetch("/", requestOptions)
-        .then(response => response.text())
-        .then(response => createSpectrogram(file))
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+            .then(response => response.text())
+            .then(response => createSpectrogram(file))
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
     })
 }
 
 function createSpectrogram(file) {
 
-    if(file != null){
+    if (file != null) {
 
         theFile = file;
 
@@ -132,34 +132,34 @@ function createSpectrogram(file) {
         waveHeight = 128;
 
     }
-   // fs.writeFile('hot-colormap.json', );   
+    // fs.writeFile('hot-colormap.json', );   
 
     //var alreadyRunning = false;
-    
-    document.getElementById('visual_output').innerHTML = ""; 
-    document.getElementById('wave-spectrogram').innerHTML = ""; 
 
-        wavesurfer = WaveSurfer.create({
-            
-            container: '#visual_output',
-            waveColor: 'red',
-            progressColor: 'black',
-            barWidth: waveBarWidth,
-            height: waveHeight,
-            normalize:true,
-            plugins: [
-                spectro = window.WaveSurfer.spectrogram.create({
-                    wavesurfer: wavesurfer,
-                    container: "#wave-spectrogram",
-                })
-            ]
-        });
-       /* if(file != null){
-         
-       lowpass = wavesurfer.backend.ac.createBiquadFilter();
+    document.getElementById('visual_output').innerHTML = "";
+    document.getElementById('wave-spectrogram').innerHTML = "";
+
+    wavesurfer = WaveSurfer.create({
+
+        container: '#visual_output',
+        waveColor: 'red',
+        progressColor: 'black',
+        barWidth: waveBarWidth,
+        height: waveHeight,
+        normalize: true,
+        plugins: [
+            spectro = window.WaveSurfer.spectrogram.create({
+                wavesurfer: wavesurfer,
+                container: "#wave-spectrogram",
+            })
+        ]
+    });
+    /* if(file != null){
+      
+    lowpass = wavesurfer.backend.ac.createBiquadFilter();
 lowpass.frequency.value = 0;
-        }*/
-  
+     }*/
+
     //wavesurfer.load('../assets/Audio/birds.mp3');
 
     wavesurfer.loadBlob(theFile);
@@ -171,15 +171,15 @@ lowpass.frequency.value = 0;
 //This method, guess what, changes the colour of the waveform.
 //It requires a hex colour passed into the method when called.
 //This should be passed as a string using ''
-function changeColour(){
-var colour = document.getElementById('colourPicker').value;
+function changeColour() {
+    var colour = document.getElementById('colourPicker').value;
     wavesurfer.setWaveColor(colour);
-    
-console.log("colour change applied");
+
+    console.log("colour change applied");
 }
 
 //This method triggers playback of the audio
-function startPlaying(){
+function startPlaying() {
 
     //wavesurfer.spectrogram.loadlabels();
     wavesurfer.playPause();
@@ -190,7 +190,7 @@ function startPlaying(){
 //The values should go up in 0.1 to ensure the waveform doesnt get toooo blocky
 //It should also only be called once a width has been decided.
 //If not the api could have to recreate multiple waveforms
-function updateBarWidth(){
+function updateBarWidth() {
     var bm = document.getElementById("barWidth").value;
 
     //wavesurfer.spectrogram.loadlabels();
@@ -204,24 +204,24 @@ function updateBarWidth(){
 //This zooms in and out the waveform
 //Values should increase by 100ish as it is uses pixels. And there are alot of pixels on a screen
 
-function zoomIn(){
-var zoomies = document.getElementById("zoomSlider").value;
-console.log(zoomies);
-    wavesurfer.zoom(zoomies)  
+function zoomIn() {
+    var zoomies = document.getElementById("zoomSlider").value;
+    console.log(zoomies);
+    wavesurfer.zoom(zoomies)
     console.log("zoom applied");
 }
 //stops current playback and rewinds to the beginning
-function rewind(){
+function rewind() {
 
     wavesurfer.stop();
 }
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Load a colormap json file to be passed to the spectrogram.create method.
     WaveSurfer.util
         .fetchFile({ url: 'hot-colormap.json', responseType: 'json' })
         .on('success', colorMap => {
             console.log("Pog")
-            
+
         });
 });
 //Attempt at getting a low pass filter to work, worked audibly 
@@ -229,31 +229,31 @@ document.addEventListener('DOMContentLoaded', function() {
 //need to edit the sound file directly every time it was changed, 
 //which was deemed to be outside the scope of this project
 
-function filters(){
+function filters() {
     console.log("filterChanged")
     var lowVal = document.getElementById("lowPassSlider").value;
-    var lowpass = wavesurfer.backend.ac.createBiquadFilter();   
+    var lowpass = wavesurfer.backend.ac.createBiquadFilter();
     lowpass.frequency.value = lowVal;
     wavesurfer.backend.setFilter(lowpass);
-//console.log(wavesurfer.getFilters());
-wavesurfer.loadBlob(theFile);
+    //console.log(wavesurfer.getFilters());
+    wavesurfer.loadBlob(theFile);
 }
 //main update script which calls the other functions, bar width needs to 
 //be called first as it recalls the spectrogram create function, placing 
 //this anywhere but the top would cause any functions called before it to be overwritten
-function update(){
+function update() {
     updateBarWidth();
     filters();
-changeColour();
-zoomIn();
+    changeColour();
+    zoomIn();
 
 
-console.log("updates applied")
+    console.log("updates applied");
 }
 
 /**
 function postmanTest(file){
-    
+
     var reader = new FileReader();
 
     var myHeaders = new Headers();
@@ -264,7 +264,7 @@ function postmanTest(file){
     var raw = reader.result;
 
     file.arrayBuffer().then(buffer => {
-        console.log(buffer); 
+        console.log(buffer);
 
         var base64 = window.btoa(
             new Uint8Array(buffer)
@@ -301,7 +301,7 @@ function fileUpload(file) {
 
 
     ============================================
-    
+
     var uploads = multer({dest: './assets/Audio'});
 
     router.post('/register', uploads.single(this.file), function(req,res,next){
