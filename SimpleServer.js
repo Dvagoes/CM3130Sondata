@@ -4,26 +4,20 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var upload = require("express-fileupload");
-const colormap = require('colormap');
 var multer = require('multer');
 var bodyParser = require('body-parser');
 var html2canvas = require('html2canvas');
 var FileSaver = require('file-saver');
 
-module.exports.colormap = colormap;
-
 // set the view engine to ejs
 app.set('view engine', 'ejs');
-
 
 const fs = require('fs');
 const { url } = require('inspector');
 //fs.writeFile('hot-colormap.json', JSON.stringify(colors));   
 
 app.get('/', function (req, res) {
-    
-
-    
+        
     res.render('pages/index');
 
 });
@@ -53,11 +47,14 @@ app.post('/', textParser, function(req,res){
     fs.writeFileSync('./assets/Audio/sound.mp3', Buffer.from(req.body.replace('data:audio/mpeg; codecs=opus;base64,', ''), 'base64'));
 
     res.send("<3")
+
 });
+
 
 // set up pathing for assets
 
 app.use(express.static(path.join(__dirname, 'assets')));
+
 
 
 // open the port

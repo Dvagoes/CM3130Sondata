@@ -54,6 +54,42 @@
             </div>
             <div id="options_0" class="options_pane"> <!-- have divs that get removed and replace eachother -->
 
+            <!-- have divs that get removed and replace eachother -->
+
+            <div id="options_0" class="options_pane on">
+                <h2>TRANSFORMATIONS</h3>
+                <div class="slider_slot">
+                    <p>Low pass filter</p>                
+                    <input class="slider"  id="lowPassSlider" type="range" min="0" max="20000" value="0"><input class="range_num"
+                        type="number" min="0" max="20000" value="0">
+                </div>
+                <div class="slider_slot">
+                    <p>zoom</p>
+                    <input class="slider" id = "zoomSlider" type="range" min="0" max="50" value="25"><input class="range_num"
+                        type="number" min="0" max="50" value="25">
+                </div>
+                <div class="slider_slot">
+                    <p>bar barWidth</p>
+                    <input id="barWidth" type = "number" min="0" max = "1" step="0.1" value="0">
+
+                </div>
+
+
+                <div class="slider_slot">
+                    
+                        <input id="colourPicker" type="color" id="head" name="head" value="#e66465">
+
+                </div>
+               <!--<button onclick="filters()" id="updateButton">Update filter changes</button>
+                <button onclick="changeColour()" id = "colorChange" >Set waveform Colour</button>
+                
+                <button onclick="zoomIn()" id="zoomer">zoom</button>
+                <button onclick="updateBarWidth()" id="barWidthButton">Update Bar Width</button>  --> 
+
+                <button onclick="startPlaying()" id = "PlayPause" >Play Pause</button>
+                <button onclick="rewind()" id="rewind">rewind</button>
+
+                <button onclick="update()" id="updateButton">Update changes</button>
             </div>
             <div id="options_1" class="options_pane">
 
