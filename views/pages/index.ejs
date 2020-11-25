@@ -7,8 +7,11 @@
     <!-- <link src = "stylesheets/sound_workshop.css"></style> -->
     <!--This is a link to the basic wavesurfer-->
     <script src="https://unpkg.com/wavesurfer.js"></script>
+
     <!--This is a link to the spectrogram plugin for wavesurfer-->
     <script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.spectrogram.js"></script>
+
+    <!--Links for making the image download function-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
    
@@ -36,23 +39,10 @@
             </label>
             
             <div id="manual_file_select">
-                <!-- 
-                    form displays file name as part of default HTML form functionality.
-                    it only works however when using the manual file selection.
-                    
-                    the form doesn't recognise the file when doing it by drag and drop.
-
-                    TODO: remove form filename display
-                 -->
+                
                 <form id="manual_file_select_form" method="POST">
 
-                    <input type="file" id="audio_upload" name="audio_upload" accept="audio/*" onchange="formOnSubmit(event)">
-
-                    <!-- submit button removed due to redundancy -->
-                    <!-- <button type="submit" value="Submit">Submit</button> -->
-
-                    <!-- clear button currently has no functionality -->
-                    <button type="Button" value="Clear">Clear</button>
+                    <input type="file" id="audio_upload" name="audio_upload" accept="audio/mp3" onchange="formOnSubmit(event)">
 
                 </form>
 
@@ -105,6 +95,11 @@
             </div>
 
             <div id="download-buttons">
+
+                <!--
+                download buttons for downloading the waveform and spectrogram
+                after generation.
+                -->
 
                 <form id="download-waveform-form" onsubmit="downloadWaveform(event)">
                     <button type="submit">Download Waveform</button>
