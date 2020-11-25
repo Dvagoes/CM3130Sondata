@@ -18,11 +18,20 @@ var router = express.Router();
 var ejs = require('ejs');
 //const { json } = require('express');
 var upload = multer({storage: 'assets/Audio'})
+
+var theFile = null;
+
 document.getElementById("lowPassSlider").addEventListener("mouseup", lowPass);
 document.getElementById("highPassSlider").addEventListener("mouseup", highPass);
 
 //following code is taken from https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
 
+var wavesurfer = null;
+var spectro = null;
+
+
+var waveBarWidth;
+var waveHeight;
 
 function dropHandler(ev) {
     console.log('File(s) dropped');
@@ -68,7 +77,12 @@ function formOnSubmit(ev) {
  * this will be used as a staging point for getting files uploaded temporarily.
  * currently it only gets the file details printed to console in json format.
  */
+
+
+
+
 function fileProcess(file) {
+
     var reader = new FileReader();
 
     var myHeaders = new Headers();
@@ -79,13 +93,13 @@ function fileProcess(file) {
     var raw = reader.result;
 
     file.arrayBuffer().then(buffer => {
-        console.log(buffer); 
+       // console.log(buffer); 
 
         var base64 = window.btoa(
             new Uint8Array(buffer)
               .reduce((data, byte) => data + String.fromCharCode(byte), '')
         );
-        console.log(base64);
+        //console.log(base64);
         var requestOptions = {
         method: 'POST',
         headers: myHeaders,
@@ -102,34 +116,99 @@ function fileProcess(file) {
 }
 
 function createSpectrogram(file) {
-    
+
+    if(file != null){
+
+        theFile = file;
+
+        waveBarWidth = 0;
+        waveHeight = 128;
+
+    }
+   // fs.writeFile('hot-colormap.json', );   
+
     //var alreadyRunning = false;
     
-        var wavesurfer = WaveSurfer.create({
+    document.getElementById('visual_output').innerHTML = ""; 
+    document.getElementById('wave-spectrogram').innerHTML = ""; 
+
+        wavesurfer = WaveSurfer.create({
             
             container: '#visual_output',
             waveColor: 'red',
-            progressColor: 'purple',
-
+            progressColor: 'black',
+            barWidth: waveBarWidth,
+            height: waveHeight,
+            normalize:true,
             plugins: [
-                window.WaveSurfer.spectrogram.create({
+                spectro = window.WaveSurfer.spectrogram.create({
                     wavesurfer: wavesurfer,
                     container: "#wave-spectrogram",
-                    //colorMap: colormap
                 })
             ]
         });
-        wavesurfer.spectrogram
-        alreadyRunning = true;
     //wavesurfer.load('../assets/Audio/birds.mp3');
 
-    wavesurfer.loadBlob(file);
+    wavesurfer.loadBlob(theFile);
 
-    
     //document.getElementById('visual_output').style.visibility = "hidden";
 
     //document.getElementById('wave').style.display = "none";
 }
+
+
+//This method, guess what, changes the colour of the waveform.
+//It requires a hex colour passed into the method when called.
+//This should be passed as a string using ''
+function changeColour(colour){
+
+    wavesurfer.setWaveColor(colour)
+    
+
+}
+
+//This method triggers playback of the audio
+function startPlaying(){
+
+    //wavesurfer.spectrogram.loadlabels();
+    wavesurfer.playPause();
+
+}
+
+//This method updates the bar width (makes the waveform look blocky)
+//The values should go up in 0.1 to ensure the waveform doesnt get toooo blocky
+//It should also only be called once a width has been decided.
+//If not the api could have to recreate multiple waveforms
+function updateBarWidth(bm){
+
+    //wavesurfer.spectrogram.loadlabels();
+    waveBarWidth = bm;
+
+    createSpectrogram(null);
+
+}
+
+
+//This zooms in and out the waveform
+//Values should increase by 100ish as it is uses pixels. And there are alot of pixels on a screen
+
+function zoomIn(zoomies){
+
+    wavesurfer.zoom(zoomies)
+
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Load a colormap json file to be passed to the spectrogram.create method.
+    WaveSurfer.util
+        .fetchFile({ url: 'hot-colormap.json', responseType: 'json' })
+        .on('success', colorMap => {
+            console.log("Pog")
+            
+        });
+});
+
 
 function lowPass(){
     console.log("filterChanged")
@@ -148,6 +227,7 @@ function highPass(){
 
     
 }
+
 
 /**
 function postmanTest(file){
