@@ -18,7 +18,12 @@ var router = express.Router();
 var ejs = require('ejs');
 //const { json } = require('express');
 var upload = multer({storage: 'assets/Audio'})
+
 var theFile = null;
+
+document.getElementById("lowPassSlider").addEventListener("mouseup", lowPass);
+document.getElementById("highPassSlider").addEventListener("mouseup", highPass);
+
 //following code is taken from https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
 
 var wavesurfer = null;
@@ -151,6 +156,7 @@ function createSpectrogram(file) {
     //document.getElementById('wave').style.display = "none";
 }
 
+
 //This method, guess what, changes the colour of the waveform.
 //It requires a hex colour passed into the method when called.
 //This should be passed as a string using ''
@@ -202,6 +208,26 @@ document.addEventListener('DOMContentLoaded', function() {
             
         });
 });
+
+
+function lowPass(){
+    console.log("filterChanged")
+    var lowVal = document.getElementById("lowPassSlider").value;
+    var lowpass = wavesurfer.backend.ac.createBiquadFilter();
+    //var lowFilter = audioCtx.createBiquadFilter();
+    lowpass.frequency.value = lowVal;
+    //lowFilter.frequency.value = lowVal;
+    wavesurfer.backend.setFilter(lowpass);
+    
+}
+function highPass(){
+
+
+
+
+    
+}
+
 
 /**
 function postmanTest(file){
