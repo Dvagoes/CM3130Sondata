@@ -32,30 +32,6 @@
         <!--<p>How to use the application</p>-->
     </div>
 
-    <div id="upload_container">
-        <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event)">
-             
-            <label for="audio_upload">
-                Choose an Audio File:
-            </label>
-            
-            <div id="manual_file_select">
-                
-                <form id="manual_file_select_form" method="POST">
-
-                    <input type="file" id="audio_upload" name="audio_upload" accept="audio/mp3" onchange="formOnSubmit(event)">
-
-                </form>
-
-            </div>
-        </div>
-        <br>
-        <div id="display_filename">
-            
-        </div>
-    </div>
-
-
     <div id="sound_workshop" style="width: 88%; margin-left: 6%;">
         <div id="visualiser" style="width: auto; margin: 6px;">
             <div id="player">
@@ -93,11 +69,11 @@
             </div>
             <div id="options_5" class="options_pane">
                 
-            </div> -->
+            </div>
         </div>
     </div>
 
-    <img src="color-wheel.png" class="Wheel" alt=""> /<!--Meant to show an example of a colour wheel but doesn't work-->
+    <img src="color-wheel.png" class="Wheel" alt=""> <!--Meant to show an example of a colour wheel but doesn't work-->
 
     <div id="upload_container">
         <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event)">
@@ -117,7 +93,7 @@
                  -->
                 <form id="manual_file_select_form" method="POST">
 
-                    <input type="file" id="audio_upload" name="audio_upload" accept="audio/*" onchange="formOnSubmit(event)">
+                    <input type="file" id="audio_upload" name="audio_upload" accept="audio/mp3" onchange="formOnSubmit(event)">
 
             <div id="download-buttons">
 
