@@ -51,7 +51,19 @@ function dropHandler(ev) {
         for (var i = 0; i < ev.dataTransfer.items.length; i++) {
             if (ev.dataTransfer.items[i].kind === 'file') {
                 file = ev.dataTransfer.items[i].getAsFile();
+                
                 // console.log('...file [' + i + '].name = ' + file.name);
+                //begin file type check
+                let fName = file.name;
+                fileExtension = fName.split('.').pop();
+                console.log("test: " + fileExtension);
+
+                //simple if statement to check if file dropped is mp3
+                if (fileExtension != 'mp3') {
+                    alert("Invalid file type detected. \n \n please upload a .mp3 file");
+                    return;
+                }
+
                 fileProcess(file);
             }
         }
