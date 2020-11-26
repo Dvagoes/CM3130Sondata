@@ -8,6 +8,7 @@ var multer = require('multer');
 var bodyParser = require('body-parser');
 var html2canvas = require('html2canvas');
 var FileSaver = require('file-saver');
+const colormap = require('colormap');
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
