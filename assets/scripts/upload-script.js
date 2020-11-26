@@ -50,8 +50,6 @@ function dropHandler(ev) {
             if (ev.dataTransfer.items[i].kind === 'file') {
                 file = ev.dataTransfer.items[i].getAsFile();
                 
-                /*
-
                 // console.log('...file [' + i + '].name = ' + file.name);
                 //begin file type check
                 let fName = file.name;
@@ -63,8 +61,6 @@ function dropHandler(ev) {
                     alert("Invalid file type detected. \n \n please upload a .mp3 file");
                     return;
                 }
-
-                */
 
                 fileProcess(file);
             }
